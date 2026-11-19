@@ -13,7 +13,7 @@
 ---
 
 ### 🔭 Currently Working On
-- **[Crispy Launcher](https://github.com/Web-mc1)** — A cross-platform Minecraft launcher built with Electron & Node.js featuring Microsoft auth, multi-loader support, and built-in Modrinth browsing.
+- **Crispy Launcher** — A cross-platform Minecraft launcher built with Electron & Node.js featuring Microsoft auth, multi-loader support, and built-in Modrinth browsing.
 - **Horizon** — Rebuilding Minecraft from the ground up in Rust, including custom `.hmod` packages (like *WaypointsAndMap*) and engine patches.
 - **J.A.R.V.I.S.** — A local, voice-activated Linux assistant daemon powered by `faster-whisper` and `Ollama`.
 - **CrispySprings SMP** — working as a bot manager and building Discord-to-Minecraft bridge plugins.
