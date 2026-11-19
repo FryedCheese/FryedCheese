@@ -42,9 +42,10 @@
     button { font-family: inherit; cursor: pointer; }
 
     .wrap {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 20px;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 28px;
     }
 
     /* Top bar */
@@ -513,6 +514,7 @@
     .copied-msg.show { display: block; }
 
     @media (max-width: 760px) {
+      .wrap { padding: 0 16px; }
       .launcher-box, .cols { grid-template-columns: 1fr; }
       .proj-head { grid-template-columns: 32px 1fr auto; }
       .proj-summary { display: none; }
