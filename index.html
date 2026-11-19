@@ -422,7 +422,7 @@
     /* Two-column notes & setup */
     .cols {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr);
       gap: 18px;
     }
 
@@ -563,7 +563,6 @@
 
   <main class="wrap">
     <section class="intro">
-      <div class="intro-kicker">auckland, nz · etienne gauchet · web-mc1</div>
       <h1>stuff i build: launchers, <em>.hmod</em> mods, games &amp; tools</h1>
       <p>
         i'm fryedcheese. i make minecraft launchers, write mods and forks for horizon, track satellites for hackathons, run smp servers, mess with local voice stuff on linux, and put 2d games up on itch.io.
@@ -585,11 +584,11 @@
           <div class="dl-tabs">
             <button class="dl-tab active" data-build="win">windows</button>
             <button class="dl-tab" data-build="linux">linux</button>
-            <button class="dl-tab" data-build="sf">sourceforge</button>
+            <button class="dl-tab" data-build="web">website</button>
           </div>
           <div class="dl-row">
             <span id="build-file">Crispy-Launcher-Setup-0.3.0.exe</span>
-            <a id="build-url" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">repo ↗</a>
+            <a id="build-url" href="https://crispylauncher.web-mc1.workers.dev/" target="_blank" rel="noopener">website ↗</a>
           </div>
         </div>
       </div>
@@ -620,10 +619,9 @@
             <div class="tags">
               <span class="tag">electron</span>
               <span class="tag">node.js</span>
-              <span class="tag">sourceforge</span>
               <span class="tag">cloudflare workers</span>
             </div>
-            <a class="proj-ext" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github repos ↗</a>
+            <a class="proj-ext" href="https://crispylauncher.web-mc1.workers.dev/" target="_blank" rel="noopener">crispylauncher.web-mc1.workers.dev ↗</a>
           </div>
         </div>
 
@@ -821,7 +819,7 @@
 
     <section id="setup" class="sec">
       <div class="sec-top">
-        <h2>languages, github &amp; laptop</h2>
+        <h2>languages &amp; github</h2>
         <span>daily setup</span>
       </div>
 
@@ -836,15 +834,6 @@
           </ul>
         </div>
 
-        <div class="box">
-          <h3>machine &amp; os</h3>
-          <ul class="kv">
-            <li><span class="k">laptop</span><span class="v">lenovo loq 15arp10e</span></li>
-            <li><span class="k">os</span><span class="v">bazzite linux · kde plasma 6</span></li>
-            <li><span class="k">cpu / gpu</span><span class="v">ryzen 7 7735hs · rtx 4050 + 680m</span></li>
-            <li><span class="k">ram</span><span class="v">16 gib</span></li>
-          </ul>
-        </div>
       </div>
     </section>
 
@@ -871,9 +860,9 @@
 
   <script>
     const builds = {
-      win: { name: "Crispy-Launcher-Setup-0.3.0.exe", href: "https://github.com/FryedCheese?tab=repositories", label: "repo ↗" },
-      linux: { name: "Crispy Launcher (Linux build)", href: "https://github.com/FryedCheese?tab=repositories", label: "repo ↗" },
-      sf: { name: "SourceForge & Cloudflare Workers", href: "https://github.com/FryedCheese?tab=repositories", label: "repo ↗" }
+      win: { name: "Crispy-Launcher-Setup-0.3.0.exe", href: "https://crispylauncher.web-mc1.workers.dev/", label: "website ↗" },
+      linux: { name: "Crispy Launcher (Linux build)", href: "https://crispylauncher.web-mc1.workers.dev/", label: "website ↗" },
+      web: { name: "crispylauncher.web-mc1.workers.dev", href: "https://crispylauncher.web-mc1.workers.dev/", label: "website ↗" }
     };
 
     document.querySelectorAll(".dl-tab").forEach((tab) => {
