@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FryedCheese — Systems, Launchers &amp; Open-Source Engineering</title>
-  <meta name="description" content="Building Rust Minecraft engines, cross-platform launchers, orbital satellite trackers, indie games, and Linux voice automation. Auckland, NZ." />
+  <title>FryedCheese — Launchers, Mods, Games &amp; Projects</title>
+  <meta name="description" content="FryedCheese (Étienne Gauchet) — Crispy Launcher, Horizon .hmod plugins, S.H.E.R.M.A.N., Overhook, MineMath, J.A.R.V.I.S., and CrispySprings SMP." />
   <style>
     :root {
       --bg-root: #090a0d;
@@ -72,7 +72,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(9, 10, 13, 0.82);
+      background: rgba(9, 10, 13, 0.85);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
@@ -194,7 +194,7 @@
     .hero-sub {
       font-size: 1.08rem;
       color: var(--text-secondary);
-      max-width: 650px;
+      max-width: 660px;
       margin-bottom: 32px;
     }
 
@@ -243,7 +243,7 @@
       border-color: var(--text-muted);
     }
 
-    /* Featured Release Strip (playhorizon.dev style) */
+    /* Featured Release Strip */
     .release-bar {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
@@ -367,9 +367,10 @@
       font-size: 0.94rem;
     }
 
-    /* Interactive Benchmark Split Comparator */
+    /* Interactive Project Spotlight Comparator */
     .bench-controls {
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 18px;
     }
@@ -444,15 +445,9 @@
       margin-left: auto;
     }
 
-    .comp-metric-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-
     .comp-big {
       font-family: var(--font-mono);
-      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-size: clamp(2rem, 4.2vw, 3.1rem);
       font-weight: 800;
       letter-spacing: -0.04em;
     }
@@ -467,9 +462,9 @@
     }
 
     .comp-sub {
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       color: var(--text-secondary);
-      max-width: 340px;
+      max-width: 360px;
     }
 
     .comp-right .comp-sub {
@@ -516,7 +511,7 @@
       z-index: 5;
     }
 
-    /* Numbered Subsystem / Repository Harness Ledger (01 - 11) */
+    /* Numbered Subsystem / Project Ledger (01 - 12) */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
@@ -564,7 +559,7 @@
 
     .ledger-main {
       display: grid;
-      grid-template-columns: 54px 1.2fr 1.6fr auto;
+      grid-template-columns: 54px 1.25fr 1.65fr auto;
       align-items: center;
       gap: 16px;
       padding: 16px 20px;
@@ -674,7 +669,7 @@
       text-decoration: underline;
     }
 
-    /* Built in the Open / Stack & Hardware Grid */
+    /* Stack & Hardware Grid */
     .open-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -835,9 +830,9 @@
         <span class="brand-tag">fryedcheese.dpdns.org</span>
       </a>
       <nav class="nav-links">
-        <a href="#benchmarks">Benchmarks</a>
-        <a href="#projects">Subsystems &amp; Repos</a>
-        <a href="#stack">Stack &amp; Hardware</a>
+        <a href="#spotlight">Spotlight</a>
+        <a href="#projects">My Projects &amp; Repos</a>
+        <a href="#stack">Stack &amp; Rig</a>
         <a href="#contact">Contact</a>
       </nav>
       <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="nav-cta">
@@ -852,115 +847,115 @@
       <div class="container">
         <div class="status-pill">
           <span class="status-dot"></span>
-          <span>Auckland, NZ · Rust, C++, Lua, Node.js &amp; Web Systems</span>
+          <span>Auckland, NZ · FryedCheese · Web-mc1 · Grate Minds</span>
         </div>
         <h1>
-          Engineering <span>fast launchers</span>, Rust game engines &amp; orbital trackers.
+          Building <span>Crispy Launcher</span>, .hmod plugins, satellite trackers &amp; indie games.
         </h1>
         <p class="hero-sub">
-          I'm Étienne Gauchet (FryedCheese / Web-mc1). I build cross-platform desktop launchers, contribute to Rust Minecraft engine internals, track low-Earth satellites, administer SMP infrastructure, and ship indie games.
+          I'm Étienne Gauchet (FryedCheese). I build cross-platform desktop launchers, write .hmod packages and Rust forks for Horizon, track orbital satellites with S.H.E.R.M.A.N., run SMP servers, build local Linux voice automation, and ship 2D games on itch.io.
         </p>
         <div class="hero-actions">
-          <a href="#projects" class="btn-primary">Explore 11 Active Builds ↓</a>
+          <a href="#projects" class="btn-primary">Browse All 12 Projects ↓</a>
           <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="btn-secondary">github.com/FryedCheese ↗</a>
           <a href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener" class="btn-secondary">Play Overhook ↗</a>
         </div>
 
-        <!-- Featured Release Bar -->
+        <!-- Featured Release Bar (Crispy Launcher - My Own Release) -->
         <div class="release-bar">
           <div>
             <div class="release-meta-top">
-              <span class="badge-amber">LATEST RELEASE · v0.3.0</span>
+              <span class="badge-amber">MY RELEASE · v0.3.0</span>
               <span style="color: var(--text-muted);">Electron + Node.js · All Rights Reserved</span>
             </div>
             <h2>Crispy Launcher</h2>
-            <p>Multi-loader Minecraft launcher with Microsoft OAuth, instant Modrinth modpack browsing, automated updates, and custom profile isolation.</p>
+            <p>My custom cross-platform Minecraft launcher featuring Microsoft OAuth login, multi-loader support, built-in Modrinth browsing, and automated updates.</p>
           </div>
           <div class="os-switcher">
             <div class="os-tabs">
-              <button class="os-tab active" data-os="linux">Linux (AppImage)</button>
-              <button class="os-tab" data-os="win">Windows (.exe)</button>
-              <button class="os-tab" data-os="web">Worker Portal</button>
+              <button class="os-tab active" data-os="win">Windows (.exe)</button>
+              <button class="os-tab" data-os="linux">Linux</button>
+              <button class="os-tab" data-os="web">Web / SourceForge</button>
             </div>
             <div class="os-cmd">
-              <span id="os-target">Crispy-Launcher-0.3.0.AppImage</span>
-              <a id="os-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" style="color: var(--accent-bright); font-weight: 700;">Get ↗</a>
+              <span id="os-target">Crispy-Launcher-Setup-0.3.0.exe</span>
+              <a id="os-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" style="color: var(--accent-bright); font-weight: 700;">View ↗</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive Performance Comparator -->
-    <section id="benchmarks">
+    <!-- Interactive Project Spotlight Comparator (100% FryedCheese Projects) -->
+    <section id="spotlight">
       <div class="container">
         <div class="section-header">
           <div>
-            <div class="section-eyebrow">Interactive Telemetry</div>
-            <h2>Engine &amp; Launcher Benchmarks</h2>
+            <div class="section-eyebrow">Interactive Project Spotlight</div>
+            <h2>My Flagship Builds Side-by-Side</h2>
           </div>
-          <p>Drag the divider to compare native Rust engine throughput and Crispy Launcher startup times against legacy Java setups.</p>
+          <p>Drag the divider to switch between my core software, modding, satellite tracking, and game development work.</p>
         </div>
 
         <div class="bench-controls">
-          <button class="bench-mode-btn active" data-mode="fps">Horizon Rust Engine vs. Vanilla JVM</button>
-          <button class="bench-mode-btn" data-mode="boot">Crispy Launcher Cold Boot vs. Legacy</button>
+          <button class="bench-mode-btn active" data-mode="desktop">Crispy Launcher vs. WaypointsAndMap (.hmod)</button>
+          <button class="bench-mode-btn" data-mode="webgame">S.H.E.R.M.A.N. Tracker vs. Overhook Game</button>
         </div>
 
         <div class="comparator-wrap" id="comparator">
           <div class="comp-pane comp-right">
-            <span class="comp-label" id="right-label">LEGACY JAVA CLIENT</span>
+            <span class="comp-label" id="right-label">MY HORIZON MOD · PLUGIN-HORIZON</span>
             <div>
-              <div class="comp-big" id="right-metric">50 FPS</div>
-              <p class="comp-sub" id="right-desc">Single-threaded chunk meshing and GC pauses on Ryzen 7 7735HS + RTX 4050.</p>
+              <div class="comp-big" id="right-metric">WaypointsAndMap</div>
+              <p class="comp-sub" id="right-desc">Custom .hmod package and Rust fork patches (horizon-FryedCheesefork) built for the Horizon client engine.</p>
             </div>
           </div>
 
           <div class="comp-pane comp-left" id="comp-left">
-            <span class="comp-label" id="left-label">HORIZON RUST ENGINE (.HMOD)</span>
+            <span class="comp-label" id="left-label">MY LAUNCHER · v0.3.0</span>
             <div>
-              <div class="comp-big" id="left-metric">153 FPS</div>
-              <p class="comp-sub" id="left-desc">Zero-GC Rust client core with native WaypointsAndMap &amp; custom shader pipeline.</p>
+              <div class="comp-big" id="left-metric">Crispy Launcher</div>
+              <p class="comp-sub" id="left-desc">Cross-platform Electron &amp; Node.js launcher with Microsoft auth, Modrinth modpack installs, and Cloudflare Workers landing page.</p>
             </div>
           </div>
 
           <div class="comp-divider" id="comp-divider">
             <div class="comp-handle">⇄</div>
           </div>
-          <input type="range" min="8" max="92" value="55" aria-label="Benchmark comparison slider" class="comp-range" id="comp-range" />
+          <input type="range" min="8" max="92" value="55" aria-label="Project spotlight slider" class="comp-range" id="comp-range" />
         </div>
       </div>
     </section>
 
-    <!-- Numbered Subsystems & Repositories -->
+    <!-- Numbered Subsystems & Repositories (100% FryedCheese's Stuff) -->
     <section id="projects">
       <div class="container">
         <div class="section-header">
           <div>
-            <div class="section-eyebrow">Repository &amp; Build Ledger</div>
-            <h2>Everything I Build &amp; Maintain</h2>
+            <div class="section-eyebrow">My Repositories &amp; Projects</div>
+            <h2>Everything I've Built &amp; Shipped</h2>
           </div>
-          <p>Click any row to inspect tech stacks, GitHub organizations, and live deployments.</p>
+          <p>Click any item to inspect the tech stack, repo/organization, and links.</p>
         </div>
 
         <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all">All (11)</button>
-          <button class="filter-btn" data-filter="systems">Systems &amp; Launchers</button>
+          <button class="filter-btn active" data-filter="all">All My Work (12)</button>
+          <button class="filter-btn" data-filter="apps">Launchers &amp; Apps</button>
           <button class="filter-btn" data-filter="minecraft">Minecraft &amp; SMP</button>
           <button class="filter-btn" data-filter="games">Games &amp; Creative</button>
         </div>
 
         <div class="ledger" id="ledger">
-          <div class="ledger-row" data-cat="systems">
+          <div class="ledger-row" data-cat="apps">
             <div class="ledger-main">
               <span class="ledger-num">01</span>
               <div class="ledger-title-wrap">
                 <span class="ledger-title">Crispy Launcher</span>
-                <span class="ledger-repo">FryedCheese / SourceForge / Cloudflare Workers</span>
+                <span class="ledger-repo">FryedCheese · SourceForge · Cloudflare Workers</span>
               </div>
-              <span class="ledger-desc">Cross-platform Electron &amp; Node.js Minecraft launcher with Microsoft auth &amp; Modrinth API.</span>
+              <span class="ledger-desc">My cross-platform Electron &amp; Node.js Minecraft launcher with Microsoft authentication and Modrinth browsing.</span>
               <div class="ledger-right">
-                <span class="pill-status status-live">v0.3.0 LIVE</span>
+                <span class="pill-status status-live">v0.3.0 RELEASED</span>
               </div>
             </div>
             <div class="ledger-details">
@@ -970,7 +965,7 @@
                 <span class="tech-tag">JavaScript</span>
                 <span class="tech-tag">Cloudflare Workers</span>
               </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View Repositories ↗</a>
+              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View on GitHub ↗</a>
             </div>
           </div>
 
@@ -978,10 +973,10 @@
             <div class="ledger-main">
               <span class="ledger-num">02</span>
               <div class="ledger-title-wrap">
-                <span class="ledger-title">Horizon Engine &amp; .hmod Plugins</span>
-                <span class="ledger-repo">Plugin-Horizon / horizon-FryedCheesefork</span>
+                <span class="ledger-title">WaypointsAndMap &amp; Horizon Fork</span>
+                <span class="ledger-repo">Web-mc1/horizon-FryedCheesefork · Plugin-Horizon</span>
               </div>
-              <span class="ledger-desc">Rust Minecraft engine patches, WaypointsAndMap .hmod package, and custom shader setups.</span>
+              <span class="ledger-desc">My .hmod mod packages, custom shader setups, and Rust pull requests for the Horizon engine.</span>
               <div class="ledger-right">
                 <span class="pill-status status-active">RUST / .HMOD</span>
               </div>
@@ -989,66 +984,43 @@
             <div class="ledger-details">
               <div class="tech-tags">
                 <span class="tech-tag">Rust</span>
-                <span class="tech-tag">WGSL Shaders</span>
+                <span class="tech-tag">.hmod Plugins</span>
                 <span class="tech-tag">Plugin-Horizon Org</span>
               </div>
               <a class="ledger-link" href="https://github.com/Plugin-Horizon" target="_blank" rel="noopener">github.com/Plugin-Horizon ↗</a>
             </div>
           </div>
 
-          <div class="ledger-row" data-cat="systems">
+          <div class="ledger-row" data-cat="apps">
             <div class="ledger-main">
               <span class="ledger-num">03</span>
               <div class="ledger-title-wrap">
                 <span class="ledger-title">S.H.E.R.M.A.N.</span>
-                <span class="ledger-repo">KiwiHacks · Orbital Telemetry Web App</span>
+                <span class="ledger-repo">KiwiHacks Project · Orbital Satellite Tracker</span>
               </div>
-              <span class="ledger-desc">3D satellite tracking and radar monitoring network powered by Cesium.js and TLE propagation.</span>
+              <span class="ledger-desc">Satellite High Elevation and Radar Monitoring Arrangement Network built with Cesium.js and satellite-js.</span>
               <div class="ledger-right">
-                <span class="pill-status status-live">DEPLOYED</span>
+                <span class="pill-status status-live">WEB APP</span>
               </div>
             </div>
             <div class="ledger-details">
               <div class="tech-tags">
                 <span class="tech-tag">Cesium.js</span>
                 <span class="tech-tag">satellite-js</span>
-                <span class="tech-tag">Space-Track API</span>
+                <span class="tech-tag">Space-Track.org</span>
               </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">Inspect Source ↗</a>
-            </div>
-          </div>
-
-          <div class="ledger-row" data-cat="systems">
-            <div class="ledger-main">
-              <span class="ledger-num">04</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">J.A.R.V.I.S. Linux Daemon</span>
-                <span class="ledger-repo">Local AI Voice &amp; Desktop Automation</span>
-              </div>
-              <span class="ledger-desc">Offline voice-activated assistant daemon running faster-whisper and Ollama on Bazzite KDE.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-active">ACTIVE DEV</span>
-              </div>
-            </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">faster-whisper</span>
-                <span class="tech-tag">Ollama</span>
-                <span class="tech-tag">Linux IPC</span>
-              </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">GitHub Profile ↗</a>
+              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View Repositories ↗</a>
             </div>
           </div>
 
           <div class="ledger-row" data-cat="games">
             <div class="ledger-main">
-              <span class="ledger-num">05</span>
+              <span class="ledger-num">04</span>
               <div class="ledger-title-wrap">
                 <span class="ledger-title">Overhook</span>
                 <span class="ledger-repo">fryedcheese.itch.io/overhook</span>
               </div>
-              <span class="ledger-desc">2D physics-based cloud-grappling platformer built for Windows, Linux, macOS, and HTML5 web.</span>
+              <span class="ledger-desc">My 2D physics-based cloud-grappling platformer published for Windows, macOS, Linux, and HTML5 web.</span>
               <div class="ledger-right">
                 <span class="pill-status status-live">PLAYABLE</span>
               </div>
@@ -1056,32 +1028,55 @@
             <div class="ledger-details">
               <div class="tech-tags">
                 <span class="tech-tag">2D Physics</span>
-                <span class="tech-tag">HTML5 / Desktop</span>
-                <span class="tech-tag">itch.io Release</span>
+                <span class="tech-tag">HTML5 &amp; Desktop</span>
+                <span class="tech-tag">itch.io</span>
               </div>
-              <a class="ledger-link" href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener">Launch on itch.io ↗</a>
+              <a class="ledger-link" href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener">Play on itch.io ↗</a>
             </div>
           </div>
 
           <div class="ledger-row" data-cat="minecraft">
             <div class="ledger-main">
-              <span class="ledger-num">06</span>
+              <span class="ledger-num">05</span>
               <div class="ledger-title-wrap">
                 <span class="ledger-title">MineMath</span>
-                <span class="ledger-repo">GitHub Pages Utility Suite</span>
+                <span class="ledger-repo">GitHub Pages · Survival Calculator</span>
               </div>
-              <span class="ledger-desc">Multi-tool Minecraft survival calculator for Nether portals, stack conversions, and XP levels.</span>
+              <span class="ledger-desc">Multi-tool Minecraft survival calculator web app for Nether portal coordinates, stacks, and XP math.</span>
               <div class="ledger-right">
                 <span class="pill-status status-live">WEB APP</span>
               </div>
             </div>
             <div class="ledger-details">
               <div class="tech-tags">
-                <span class="tech-tag">HTML5</span>
-                <span class="tech-tag">CSS3</span>
-                <span class="tech-tag">Vanilla JS</span>
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag">CSS</span>
+                <span class="tech-tag">JavaScript</span>
               </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View Repo ↗</a>
+              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View on GitHub ↗</a>
+            </div>
+          </div>
+
+          <div class="ledger-row" data-cat="apps">
+            <div class="ledger-main">
+              <span class="ledger-num">06</span>
+              <div class="ledger-title-wrap">
+                <span class="ledger-title">J.A.R.V.I.S. Linux Assistant</span>
+                <span class="ledger-repo">Local AI Voice Daemon · Bazzite Linux</span>
+              </div>
+              <span class="ledger-desc">My local voice-activated assistant daemon powered by faster-whisper and Ollama to launch apps and run searches.</span>
+              <div class="ledger-right">
+                <span class="pill-status status-active">IN DEVELOPMENT</span>
+              </div>
+            </div>
+            <div class="ledger-details">
+              <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">faster-whisper</span>
+                <span class="tech-tag">Ollama</span>
+                <span class="tech-tag">KDE Plasma</span>
+              </div>
+              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">GitHub Profile ↗</a>
             </div>
           </div>
 
@@ -1089,22 +1084,22 @@
             <div class="ledger-main">
               <span class="ledger-num">07</span>
               <div class="ledger-title-wrap">
-                <span class="ledger-title">CrispySprings SMP &amp; Discord Bridge</span>
-                <span class="ledger-repo">Paper / Folia · Custom Ticket &amp; Sync Plugins</span>
+                <span class="ledger-title">CrispySprings SMP &amp; CheeseWhiz SMP</span>
+                <span class="ledger-repo">Paper / Folia · Discord Bridge Plugins</span>
               </div>
-              <span class="ledger-desc">High-tickrate SMP server infrastructure with custom Discord-to-Minecraft ticket &amp; role bridges.</span>
+              <span class="ledger-desc">My Minecraft multiplayer servers and custom Discord-to-Minecraft bridge plugins for tickets and moderation.</span>
               <div class="ledger-right">
-                <span class="pill-status status-live">ONLINE</span>
+                <span class="pill-status status-live">SERVER INFRA</span>
               </div>
             </div>
             <div class="ledger-details">
               <div class="tech-tags">
                 <span class="tech-tag">Paper / Folia</span>
                 <span class="tech-tag">LuckPerms</span>
-                <span class="tech-tag">Pterodactyl / AMP</span>
+                <span class="tech-tag">AMP / Pterodactyl</span>
                 <span class="tech-tag">Tailscale</span>
               </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">Server Tools ↗</a>
+              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View Repos ↗</a>
             </div>
           </div>
 
@@ -1112,43 +1107,43 @@
             <div class="ledger-main">
               <span class="ledger-num">08</span>
               <div class="ledger-title-wrap">
-                <span class="ledger-title">Grate Minds Packs</span>
-                <span class="ledger-repo">Modrinth · fryedCheese_red &amp; Data Packs</span>
+                <span class="ledger-title">fryedCheese_red &amp; Grate Minds Packs</span>
+                <span class="ledger-repo">Modrinth · Resource &amp; Data Packs</span>
               </div>
-              <span class="ledger-desc">Custom PvP/survival resource packs (fryedCheese_red) and Cobblestone-to-Sand data packs.</span>
+              <span class="ledger-desc">My fryedCheese_red resource pack, Lifehood pack, and Cobblestone-to-Sand data pack published under Grate Minds.</span>
               <div class="ledger-right">
                 <span class="pill-status status-live">MODRINTH</span>
               </div>
             </div>
             <div class="ledger-details">
               <div class="tech-tags">
-                <span class="tech-tag">MCJSON</span>
                 <span class="tech-tag">Resource Packs</span>
                 <span class="tech-tag">Data Packs</span>
+                <span class="tech-tag">Grate Minds</span>
               </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">Explore Packs ↗</a>
+              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">Explore Projects ↗</a>
             </div>
           </div>
 
-          <div class="ledger-row" data-cat="games">
+          <div class="ledger-row" data-cat="apps">
             <div class="ledger-main">
               <span class="ledger-num">09</span>
               <div class="ledger-title-wrap">
-                <span class="ledger-title">Alloy Multiplayer Platform</span>
-                <span class="ledger-repo">UGC Sandbox · Alloy Economy &amp; Wardrobe</span>
+                <span class="ledger-title">Discord Command &amp; Control Hub</span>
+                <span class="ledger-repo">Centralized Bot Telemetry &amp; Webhooks</span>
               </div>
-              <span class="ledger-desc">Multiplayer game platform architecture featuring the Alloy currency, trading, and avatar wardrobe.</span>
+              <span class="ledger-desc">Centralized Discord operations server aggregating webhook logs, bot statuses, and formatted announcements.</span>
               <div class="ledger-right">
-                <span class="pill-status status-active">CONCEPT / R&amp;D</span>
+                <span class="pill-status status-active">BOT OPS</span>
               </div>
             </div>
             <div class="ledger-details">
               <div class="tech-tags">
-                <span class="tech-tag">Lua</span>
-                <span class="tech-tag">C++</span>
-                <span class="tech-tag">Multiplayer Netcode</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Discord Webhooks</span>
+                <span class="tech-tag">Automation</span>
               </div>
-              <span class="ledger-link" href="#contact">Inquire ↗</a>
+              <a class="ledger-link" href="#contact">Connect on Discord ↗</a>
             </div>
           </div>
 
@@ -1156,41 +1151,63 @@
             <div class="ledger-main">
               <span class="ledger-num">10</span>
               <div class="ledger-title-wrap">
-                <span class="ledger-title">Visual Novel Soundtrack Composition</span>
-                <span class="ledger-repo">Spooktober Visual Novel Jam</span>
+                <span class="ledger-title">Alloy Gaming Platform Concept</span>
+                <span class="ledger-repo">UGC Platform · Alloy Currency &amp; Wardrobe</span>
               </div>
-              <span class="ledger-desc">Original atmospheric and electronic soundtrack composition for collaborative visual novel releases.</span>
+              <span class="ledger-desc">My multiplayer gaming platform design featuring the Alloy currency, marketplace trading, and avatar wardrobe.</span>
+              <div class="ledger-right">
+                <span class="pill-status status-active">DESIGN / R&amp;D</span>
+              </div>
+            </div>
+            <div class="ledger-details">
+              <div class="tech-tags">
+                <span class="tech-tag">Lua</span>
+                <span class="tech-tag">C++</span>
+                <span class="tech-tag">Game Systems</span>
+              </div>
+              <a class="ledger-link" href="#contact">Get in Touch ↗</a>
+            </div>
+          </div>
+
+          <div class="ledger-row" data-cat="games">
+            <div class="ledger-main">
+              <span class="ledger-num">11</span>
+              <div class="ledger-title-wrap">
+                <span class="ledger-title">Visual Novel Soundtrack Composition</span>
+                <span class="ledger-repo">Spooktober 8th Annual Visual Novel Jam</span>
+              </div>
+              <span class="ledger-desc">Original music composition created for collaborative visual novel game jam releases on itch.io.</span>
               <div class="ledger-right">
                 <span class="pill-status status-live">RELEASED</span>
               </div>
             </div>
             <div class="ledger-details">
               <div class="tech-tags">
-                <span class="tech-tag">Original Score</span>
-                <span class="tech-tag">Audio Mastering</span>
+                <span class="tech-tag">Music Composition</span>
                 <span class="tech-tag">Game Jam</span>
+                <span class="tech-tag">itch.io</span>
               </div>
-              <a class="ledger-link" href="https://fryedcheese.itch.io" target="_blank" rel="noopener">itch.io Credits ↗</a>
+              <a class="ledger-link" href="https://fryedcheese.itch.io" target="_blank" rel="noopener">itch.io Page ↗</a>
             </div>
           </div>
 
-          <div class="ledger-row" data-cat="systems">
+          <div class="ledger-row" data-cat="apps">
             <div class="ledger-main">
-              <span class="ledger-num">11</span>
+              <span class="ledger-num">12</span>
               <div class="ledger-title-wrap">
-                <span class="ledger-title">@fryed_cheese Devlogs &amp; Showcases</span>
-                <span class="ledger-repo">YouTube · Software Demos &amp; Gaming</span>
+                <span class="ledger-title">@fryed_cheese YouTube Channel</span>
+                <span class="ledger-repo">youtube.com/@fryed_cheese</span>
               </div>
-              <span class="ledger-desc">Technical showcases for Crispy Launcher, Horizon Rust mods, and Minecraft engineering.</span>
+              <span class="ledger-desc">My gaming commentary, Crispy Launcher showcases, and software devlog videos &amp; Shorts.</span>
               <div class="ledger-right">
-                <span class="pill-status status-live">CHANNEL</span>
+                <span class="pill-status status-live">CREATOR</span>
               </div>
             </div>
             <div class="ledger-details">
               <div class="tech-tags">
                 <span class="tech-tag">OBS Studio</span>
-                <span class="tech-tag">Linux Audio Routing</span>
-                <span class="tech-tag">Devlogs</span>
+                <span class="tech-tag">Software Showcases</span>
+                <span class="tech-tag">Gaming</span>
               </div>
               <a class="ledger-link" href="https://www.youtube.com/@fryed_cheese" target="_blank" rel="noopener">youtube.com/@fryed_cheese ↗</a>
             </div>
@@ -1204,49 +1221,49 @@
       <div class="container">
         <div class="section-header">
           <div>
-            <div class="section-eyebrow">Built in the Open</div>
-            <h2>Languages, Infrastructure &amp; Rig</h2>
+            <div class="section-eyebrow">My Setup &amp; Skills</div>
+            <h2>Languages, GitHub &amp; Workstation</h2>
           </div>
-          <p>Daily drivers across systems programming, edge deployment, and Linux desktop tuning.</p>
+          <p>The languages I write, my GitHub accounts, and the Linux laptop I build everything on.</p>
         </div>
 
         <div class="open-grid">
           <div class="open-card">
             <div>
-              <h3>Core Languages</h3>
-              <p>Low-level engine modifications paired with fast web and scripting runtimes.</p>
+              <h3>Languages I Code In</h3>
+              <p>From low-level engine mods and game scripting to desktop launchers and web tools.</p>
             </div>
             <ul class="stat-list">
-              <li><span>Systems</span><span class="stat-val">Rust · C++</span></li>
-              <li><span>Scripting &amp; Games</span><span class="stat-val">Lua · Python</span></li>
-              <li><span>Desktop &amp; Web</span><span class="stat-val">Node.js · JS · HTML/CSS</span></li>
-              <li><span>Hackathons</span><span class="stat-val">MIT Hackathon Winner</span></li>
+              <li><span>Systems &amp; Mods</span><span class="stat-val">Rust · C++</span></li>
+              <li><span>Games &amp; AI</span><span class="stat-val">Lua · Python</span></li>
+              <li><span>Apps &amp; Web</span><span class="stat-val">Node.js · JS · HTML/CSS</span></li>
+              <li><span>Achievement</span><span class="stat-val">MIT Hackathon Winner</span></li>
             </ul>
           </div>
 
           <div class="open-card">
             <div>
-              <h3>GitHub &amp; Edge Infra</h3>
-              <p>Active contributor across personal accounts and the Plugin-Horizon organization.</p>
+              <h3>GitHub &amp; Hosting</h3>
+              <p>Active across FryedCheese, Web-mc1, and the Plugin-Horizon organization.</p>
             </div>
             <ul class="stat-list">
-              <li><span>Public Repositories</span><span class="stat-val">12+ Active</span></li>
-              <li><span>GitHub Badges</span><span class="stat-val">Pull Shark x2 · Pair</span></li>
-              <li><span>Edge &amp; Tunneling</span><span class="stat-val">Cloudflare · Tailscale</span></li>
-              <li><span>Game Hosting</span><span class="stat-val">Paper · Folia · AMP</span></li>
+              <li><span>Public Repos</span><span class="stat-val">12 Repositories</span></li>
+              <li><span>Achievements</span><span class="stat-val">Pull Shark x2 · Pair</span></li>
+              <li><span>Deployments</span><span class="stat-val">GitHub Pages · Workers</span></li>
+              <li><span>Server Network</span><span class="stat-val">Tailscale · Playit.gg</span></li>
             </ul>
           </div>
 
           <div class="open-card">
             <div>
-              <h3>Linux Workstation</h3>
-              <p>Daily-driven immutable Linux setup tuned for compilation, shaders, and local AI.</p>
+              <h3>My Linux Rig</h3>
+              <p>Lenovo LOQ 15ARP10E running immutable Bazzite Linux with KDE Plasma 6.</p>
             </div>
             <ul class="stat-list">
-              <li><span>OS &amp; Desktop</span><span class="stat-val">Bazzite · KDE Plasma 6</span></li>
-              <li><span>CPU</span><span class="stat-val">Ryzen 7 7735HS</span></li>
-              <li><span>GPU</span><span class="stat-val">RTX 4050 + Radeon 680M</span></li>
-              <li><span>Memory</span><span class="stat-val">16 GiB DDR5</span></li>
+              <li><span>OS &amp; DE</span><span class="stat-val">Bazzite · KDE Plasma</span></li>
+              <li><span>Processor</span><span class="stat-val">Ryzen 7 7735HS</span></li>
+              <li><span>Graphics</span><span class="stat-val">RTX 4050 + Radeon 680M</span></li>
+              <li><span>Memory</span><span class="stat-val">16 GiB RAM</span></li>
             </ul>
           </div>
         </div>
@@ -1258,9 +1275,9 @@
       <div class="container">
         <div class="contact-strip">
           <div>
-            <div class="section-eyebrow">Direct Channels</div>
-            <h2 style="font-size: 1.45rem; font-weight: 800;">Questions, Collaborations &amp; Business</h2>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">Click either handle below to copy directly to your clipboard.</p>
+            <div class="section-eyebrow">Reach Out</div>
+            <h2 style="font-size: 1.45rem; font-weight: 800;">Questions, Feedback &amp; Business Inquiries</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Click either button to copy my Discord handle or email address.</p>
           </div>
           <div class="copy-group">
             <button class="copy-btn" data-copy="fryedcheese">
@@ -1281,25 +1298,25 @@
 
   <footer class="container">
     <span>© 2026 Étienne Gauchet (FryedCheese) · fryedcheese.dpdns.org</span>
-    <span>Hosted on GitHub Pages · DNS via DigitalPlat</span>
+    <span>Hosted on GitHub Pages · Domain via DigitalPlat</span>
   </footer>
 
   <div class="toast" id="toast">Copied to clipboard</div>
 
   <script>
-    // OS Release Switcher
+    // OS Release Switcher for Crispy Launcher
     const osTargets = {
-      linux: {
-        text: "Crispy-Launcher-0.3.0.AppImage",
-        href: "https://github.com/FryedCheese?tab=repositories"
-      },
       win: {
         text: "Crispy-Launcher-Setup-0.3.0.exe",
         href: "https://github.com/FryedCheese?tab=repositories"
       },
+      linux: {
+        text: "Crispy-Launcher-0.3.0 (Linux Build)",
+        href: "https://github.com/FryedCheese?tab=repositories"
+      },
       web: {
-        text: "https://fryedcheese.dpdns.org",
-        href: "https://fryedcheese.dpdns.org"
+        text: "SourceForge & Cloudflare Workers",
+        href: "https://github.com/FryedCheese?tab=repositories"
       }
     };
 
@@ -1313,7 +1330,7 @@
       });
     });
 
-    // Benchmark Interactive Slider
+    // Interactive Project Spotlight Slider
     const range = document.getElementById("comp-range");
     const leftPane = document.getElementById("comp-left");
     const divider = document.getElementById("comp-divider");
@@ -1325,22 +1342,22 @@
 
     range.addEventListener("input", (e) => updateSlider(e.target.value));
 
-    const benchModes = {
-      fps: {
-        leftLabel: "HORIZON RUST ENGINE (.HMOD)",
-        leftMetric: "153 FPS",
-        leftDesc: "Zero-GC Rust client core with native WaypointsAndMap & custom shader pipeline.",
-        rightLabel: "LEGACY JAVA CLIENT",
-        rightMetric: "50 FPS",
-        rightDesc: "Single-threaded chunk meshing and GC pauses on Ryzen 7 7735HS + RTX 4050."
+    const spotlightModes = {
+      desktop: {
+        leftLabel: "MY LAUNCHER · v0.3.0",
+        leftMetric: "Crispy Launcher",
+        leftDesc: "Cross-platform Electron & Node.js launcher with Microsoft auth, Modrinth modpack installs, and Cloudflare Workers landing page.",
+        rightLabel: "MY HORIZON MOD · PLUGIN-HORIZON",
+        rightMetric: "WaypointsAndMap",
+        rightDesc: "Custom .hmod package and Rust fork patches (horizon-FryedCheesefork) built for the Horizon client engine."
       },
-      boot: {
-        leftLabel: "CRISPY LAUNCHER v0.3.0",
-        leftMetric: "0.8s Ready",
-        leftDesc: "Cached Microsoft token auth, parallel Modrinth index fetch, and instant instance launch.",
-        rightLabel: "STANDARD BLOATED LAUNCHER",
-        rightMetric: "4.2s Ready",
-        rightDesc: "Heavy telemetry startup, sequential asset verification, and slow Java runtime checks."
+      webgame: {
+        leftLabel: "ORBITAL TRACKER · KIWIHACKS",
+        leftMetric: "S.H.E.R.M.A.N.",
+        leftDesc: "3D satellite tracking and radar monitoring network built with Cesium.js, satellite-js, and Space-Track orbital data.",
+        rightLabel: "INDIE 2D PLATFORMER · ITCH.IO",
+        rightMetric: "Overhook",
+        rightDesc: "Physics-based cloud-grappling platformer built and published for Windows, macOS, Linux, and HTML5 web."
       }
     };
 
@@ -1348,7 +1365,7 @@
       btn.addEventListener("click", () => {
         document.querySelectorAll(".bench-mode-btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
-        const m = benchModes[btn.dataset.mode];
+        const m = spotlightModes[btn.dataset.mode];
         document.getElementById("left-label").textContent = m.leftLabel;
         document.getElementById("left-metric").textContent = m.leftMetric;
         document.getElementById("left-desc").textContent = m.leftDesc;
