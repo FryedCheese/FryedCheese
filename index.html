@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fryedcheese — portfolio carousel</title>
+  <title>fryedcheese — gaming &amp; dev hub</title>
   <style>
     :root {
       --bg: #0c0c0d;
-      --rail: #101012;
       --surface: #141416;
       --surface-2: #1b1b1e;
-      --line: #27272c;
-      --line-strong: #3a3a42;
+      --surface-3: #232327;
+      --line: #29292e;
+      --line-strong: #3b3b42;
       --ink: #f5f4f0;
       --muted: #a6a5a0;
       --dim: #6f6e6a;
@@ -47,216 +47,413 @@
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; }
 
+    .wrap {
+      width: 100%;
+      padding: 0 clamp(18px, 3.2vw, 52px);
+    }
+
+    /* Slanted esports accent */
     .skew-tag {
       display: inline-block;
       transform: skewX(-12deg);
       background: var(--accent);
       color: #0b0b0c;
       font-family: var(--mono);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 3px 10px;
     }
 
-    .skew-tag > span {
+    .skew-tag span {
       display: inline-block;
       transform: skewX(12deg);
     }
 
-    /* PlayerX-style Left Sidebar Rail + Right Main Stage */
-    .shell {
-      display: grid;
-      grid-template-columns: 230px minmax(0, 1fr);
-      min-height: 100vh;
-    }
-
-    .sidebar {
+    /* Top bar */
+    .topbar {
       position: sticky;
       top: 0;
-      height: 100vh;
-      background: var(--rail);
-      border-right: 1px solid var(--line);
-      padding: 28px 22px;
+      z-index: 30;
+      background: rgba(12, 12, 13, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: space-between;
+      height: 64px;
       gap: 24px;
-      z-index: 25;
     }
 
-    .logo-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .emblem {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      background:
-        radial-gradient(circle at 35% 35%, rgba(245, 158, 11, 0.35), transparent 62%),
-        conic-gradient(from 210deg, var(--accent), var(--accent-2), #38bdf8, var(--accent));
-      display: grid;
-      place-items: center;
-      box-shadow: 0 0 24px var(--accent-glow);
-      position: relative;
-    }
-
-    .emblem::after {
-      content: "FC";
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--rail);
-      display: grid;
-      place-items: center;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       font-family: var(--display);
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1.35rem;
       letter-spacing: 0.06em;
-      color: var(--ink);
+      text-transform: uppercase;
     }
 
-    .brand-title {
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      transform: skewX(-12deg);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      color: #0b0b0c;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+    .brand-mark i {
+      font-style: normal;
+      transform: skewX(12deg);
+    }
+
+    .brand .sub {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--muted);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
       font-family: var(--display);
-      font-size: 1.35rem;
+      font-size: 0.95rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      line-height: 1;
-    }
-
-    .brand-domain {
-      font-family: var(--mono);
-      font-size: 0.72rem;
       color: var(--muted);
     }
 
-    .side-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    .nav a {
+      position: relative;
+      padding: 6px 0;
     }
 
-    .side-nav a {
-      font-family: var(--display);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 9px 12px;
-      border-left: 2px solid transparent;
-      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-    }
-
-    .side-nav a:hover {
+    .nav a:hover,
+    .nav a::after {
       color: var(--ink);
-      border-left-color: var(--accent);
-      background: rgba(245, 158, 11, 0.06);
     }
 
-    .side-foot {
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.18s ease;
+    }
+
+    .nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .top-actions {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      border-top: 1px solid var(--line);
-      padding-top: 16px;
+      align-items: center;
+      gap: 10px;
     }
 
-    .side-btn {
+    .pill-btn {
       font-family: var(--mono);
-      font-size: 0.74rem;
-      font-weight: 700;
-      padding: 8px 10px;
-      border: 1px solid var(--line-strong);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 7px 13px;
       background: var(--surface);
+      border: 1px solid var(--line-strong);
       color: var(--ink);
-      text-align: center;
-      text-transform: uppercase;
+      transform: skewX(-10deg);
+      display: inline-flex;
+      align-items: center;
     }
 
-    .side-btn:hover {
+    .pill-btn > span {
+      transform: skewX(10deg);
+    }
+
+    .pill-btn:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
 
-    .side-btn.amber {
+    .pill-btn.amber {
       background: var(--accent);
       border-color: var(--accent);
       color: #0b0b0c;
+      font-weight: 800;
     }
 
-    .side-btn.amber:hover {
+    .pill-btn.amber:hover {
       background: #fbbf24;
       border-color: #fbbf24;
       color: #0b0b0c;
     }
 
-    /* Mobile top bar (hidden on desktop) */
-    .mobile-bar {
-      display: none;
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: rgba(12, 12, 13, 0.94);
-      backdrop-filter: blur(8px);
+    /* Hero / Arena Banner */
+    .hero {
+      padding: 96px 0 64px;
       border-bottom: 1px solid var(--line);
-      padding: 12px 18px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.9fr);
+      gap: 40px;
       align-items: center;
-      justify-content: space-between;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
       gap: 12px;
+      margin-bottom: 18px;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--muted);
     }
 
-    .stage {
-      padding: 48px clamp(18px, 3vw, 44px) 64px;
-      display: flex;
-      flex-direction: column;
-      gap: 56px;
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 5.2vw, 4.3rem);
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
     }
 
-    /* Carousel Showcase Section (matching screenshot) */
-    .carousel-sec {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
+    .hero h1 .stroke {
+      color: transparent;
+      -webkit-text-stroke: 1.4px var(--ink);
     }
 
-    .carousel-head {
+    .hero h1 .amber {
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .hero-cta {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
       gap: 14px;
     }
 
-    .carousel-title {
+    .cta-btn {
       font-family: var(--display);
-      font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+      font-size: 0.96rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      padding: 11px 22px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
       color: var(--ink);
-    }
-
-    .carousel-controls {
-      display: flex;
+      transform: skewX(-12deg);
+      display: inline-flex;
       align-items: center;
       gap: 8px;
     }
 
+    .cta-btn > span {
+      transform: skewX(12deg);
+    }
+
+    .cta-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .cta-btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0b0b0c;
+      box-shadow: 0 0 28px var(--accent-glow);
+    }
+
+    .cta-btn.primary:hover {
+      background: #fbbf24;
+      border-color: #fbbf24;
+      color: #0b0b0c;
+    }
+
+    /* Featured Launcher Match Card */
+    .featured-card {
+      background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+      border: 1px solid var(--line-strong);
+      border-top: 3px solid var(--accent);
+      padding: 22px;
+      position: relative;
+    }
+
+    .fc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--ok);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ok);
+    }
+
+    .fc-ver {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .featured-card h2 {
+      font-family: var(--display);
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .featured-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      max-width: none;
+    }
+
+    .dl-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .dl-tab {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 7px 8px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .dl-tab.active {
+      background: var(--surface-3);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .dl-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
+
+    .dl-box span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .dl-box a {
+      color: var(--accent);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* Section Headers */
+    .sec {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sec-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .sec-bar h2 {
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .sec-bar h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .sec-meta {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--dim);
+    }
+
+    /* Filter tabs */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
     .fbtn {
       font-family: var(--display);
-      font-size: 0.84rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 6px 12px;
+      padding: 7px 15px;
       background: var(--surface);
       border: 1px solid var(--line);
       color: var(--muted);
@@ -269,526 +466,167 @@
       color: var(--accent);
     }
 
-    .nav-arrow {
-      width: 34px;
-      height: 34px;
+    /* PlayerX Roster / Project Grid */
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
       background: var(--surface);
-      border: 1px solid var(--line-strong);
-      color: var(--ink);
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      display: grid;
-      place-items: center;
-    }
-
-    .nav-arrow:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .carousel-track {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .slide-card {
-      position: relative;
-      aspect-ratio: 3 / 5.4;
-      min-height: 410px;
       border: 1px solid var(--line);
-      background: var(--surface);
-      overflow: hidden;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      justify-content: space-between;
+      gap: 16px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
     }
 
-    .slide-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+    .card:hover {
+      border-color: var(--line-strong);
+      transform: translateY(-2px);
     }
 
-    .slide-art {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-
-    /* Distinct illustrated world backdrops per slide */
-    .art-1 {
-      background:
-        radial-gradient(circle at 65% 24%, rgba(251, 191, 36, 0.35), transparent 42%),
-        radial-gradient(circle at 28% 68%, rgba(239, 68, 68, 0.32), transparent 52%),
-        linear-gradient(175deg, #221712 0%, #151218 52%, #0c0c0e 100%);
-    }
-
-    .art-1::before {
-      content: "";
-      position: absolute;
-      inset: 14% 10% 34%;
-      border: 1px solid rgba(245, 158, 11, 0.22);
-      background: repeating-linear-gradient(
-        90deg,
-        rgba(245, 158, 11, 0.08) 0 2px,
-        transparent 2px 24px
-      );
-      transform: skewY(-6deg);
-    }
-
-    .art-2 {
-      background:
-        radial-gradient(circle at 50% 25%, rgba(168, 85, 247, 0.42), transparent 48%),
-        radial-gradient(circle at 50% 72%, rgba(56, 189, 248, 0.34), transparent 50%),
-        linear-gradient(180deg, #1b112c 0%, #141936 55%, #0b0d17 100%);
-    }
-
-    .art-2::before {
-      content: "";
-      position: absolute;
-      left: 16%;
-      right: 16%;
-      top: 26%;
-      height: 44%;
-      border-top: 2px solid rgba(192, 132, 252, 0.45);
-      border-left: 2px solid rgba(125, 211, 252, 0.3);
-      border-right: 2px solid rgba(125, 211, 252, 0.3);
-      box-shadow: inset 0 0 40px rgba(56, 189, 248, 0.2);
-    }
-
-    .art-3 {
-      background:
-        radial-gradient(circle at 62% 22%, rgba(196, 181, 253, 0.45), transparent 36%),
-        radial-gradient(circle at 30% 62%, rgba(139, 92, 246, 0.34), transparent 55%),
-        linear-gradient(180deg, #121638 0%, #241948 54%, #0f1024 100%);
-    }
-
-    .art-3::after {
-      content: "";
-      position: absolute;
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      top: 12%;
-      right: 12%;
-      background: radial-gradient(circle at 35% 35%, #f5f3ff, #a78bfa 70%, #4c1d95 100%);
-      opacity: 0.65;
-    }
-
-    .art-4 {
-      background:
-        radial-gradient(circle at 70% 24%, rgba(253, 224, 71, 0.35), transparent 45%),
-        linear-gradient(180deg, #1d5fa8 0%, #56a3d9 46%, #eab308 78%, #9a3412 100%);
-    }
-
-    .art-4::before {
-      content: "";
-      position: absolute;
-      left: -10%;
-      right: -10%;
-      bottom: 28%;
-      height: 18%;
-      background: linear-gradient(90deg, transparent, rgba(254, 249, 195, 0.35), transparent);
-      transform: rotate(-8deg);
-    }
-
-    .art-5 {
-      background:
-        radial-gradient(circle at 52% 18%, rgba(45, 212, 191, 0.4), transparent 48%),
-        radial-gradient(circle at 30% 75%, rgba(16, 185, 129, 0.28), transparent 52%),
-        linear-gradient(180deg, #0b2933 0%, #0d3b38 52%, #08171a 100%);
-    }
-
-    .art-5::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        90deg,
-        rgba(94, 234, 212, 0.09) 0 3px,
-        transparent 3px 28px
-      );
-    }
-
-    .slide-overlay {
-      position: relative;
-      z-index: 1;
-      padding: 44px 16px 16px;
-      background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 12, 0.88) 34%, rgba(10, 10, 12, 0.98) 100%);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .slide-meta {
+    .card-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
       font-family: var(--mono);
-      font-size: 0.68rem;
-      margin-bottom: 6px;
+      font-size: 0.72rem;
     }
 
-    .slide-idx {
-      color: var(--accent);
-      font-weight: 800;
+    .card-num {
+      color: var(--dim);
+      font-weight: 700;
     }
 
-    .slide-badge {
+    .card-status {
       color: var(--ok);
       text-transform: uppercase;
       font-weight: 700;
     }
 
-    .slide-badge.wip {
+    .card-status.wip {
       color: var(--accent);
     }
 
-    .slide-card h3 {
+    .card h3 {
       font-family: var(--display);
-      font-size: 1.25rem;
+      font-size: 1.32rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
-      line-height: 1.1;
       margin-bottom: 6px;
     }
 
-    .slide-card p {
-      font-size: 0.8rem;
+    .card p {
+      font-size: 0.88rem;
       color: var(--muted);
-      margin-bottom: 10px;
     }
 
-    .slide-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--dim);
-    }
-
-    .slide-link {
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .slide-link:hover { text-decoration: underline; }
-
-    .carousel-caption {
-      text-align: center;
-      font-family: var(--mono);
-      font-size: 0.76rem;
-      color: var(--muted);
-      padding-top: 4px;
-    }
-
-    /* Intro + Crispy Launcher strip */
-    .hero-strip {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.9fr);
-      gap: 28px;
-      align-items: stretch;
+    .card-foot {
       border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      padding: 36px 0;
-    }
-
-    .hero-copy h1 {
-      font-family: var(--display);
-      font-size: clamp(2rem, 3.8vw, 3.1rem);
-      font-weight: 700;
-      line-height: 1.02;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      margin: 12px 0 12px;
-    }
-
-    .hero-copy h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
-
-    .hero-copy p {
-      color: var(--muted);
-      font-size: 0.96rem;
-      max-width: 720px;
-      margin-bottom: 18px;
-    }
-
-    .hero-actions {
+      padding-top: 12px;
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .cta-btn {
-      font-family: var(--display);
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 9px 18px;
-      border: 1px solid var(--line-strong);
-      background: var(--surface);
-      color: var(--ink);
-      transform: skewX(-12deg);
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .cta-btn > span { transform: skewX(12deg); }
-
-    .cta-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .cta-btn.primary {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #0b0b0c;
-      box-shadow: 0 0 24px var(--accent-glow);
-    }
-
-    .cta-btn.primary:hover {
-      background: #fbbf24;
-      border-color: #fbbf24;
-      color: #0b0b0c;
-    }
-
-    .launcher-card {
-      background: var(--surface);
-      border: 1px solid var(--line-strong);
-      border-top: 3px solid var(--accent);
-      padding: 18px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .launcher-card h2 {
-      font-family: var(--display);
-      font-size: 1.45rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .launcher-card p {
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .dl-tabs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-    }
-
-    .dl-tab {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 6px;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .dl-tab.active {
-      background: var(--surface-2);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .dl-row {
-      display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      padding: 9px 11px;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-    }
-
-    .dl-row span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .dl-row a {
-      color: var(--accent);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    /* Full 12-project archive */
-    .sec-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .sec-head h2 {
-      font-family: var(--display);
-      font-size: 1.55rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .sec-head h2 em {
-      font-style: normal;
-      color: var(--accent);
-    }
-
-    .sec-head span {
-      font-family: var(--mono);
-      font-size: 0.74rem;
-      color: var(--dim);
-    }
-
-    .archive-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .proj-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      padding: 16px 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .proj-card:hover {
-      border-color: var(--line-strong);
-    }
-
-    .proj-top {
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--dim);
-    }
-
-    .proj-card h3 {
-      font-family: var(--display);
-      font-size: 1.2rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      margin: 4px 0;
-    }
-
-    .proj-card p {
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .proj-foot {
-      border-top: 1px solid var(--line);
-      padding-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 0.7rem;
     }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 4px;
+      gap: 5px;
     }
 
     .tag {
-      padding: 2px 6px;
+      font-family: var(--mono);
+      font-size: 0.69rem;
+      padding: 2px 7px;
       background: var(--bg);
       border: 1px solid var(--line);
       color: var(--muted);
     }
 
-    /* Setup & Contact */
-    .setup-box {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      padding: 20px 22px;
+    .card-link {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
     }
 
-    .setup-box h3 {
+    .card-link:hover { text-decoration: underline; }
+
+    /* Setup block */
+    .setup-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 22px 24px;
+    }
+
+    .setup-panel h3 {
       font-family: var(--display);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .kv {
       list-style: none;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px 24px;
+      gap: 12px 28px;
       font-family: var(--mono);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
     }
 
     .kv li {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
-      padding-bottom: 8px;
+      gap: 14px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--line);
     }
 
     .kv .k { color: var(--muted); }
     .kv .v { color: var(--ink); text-align: right; }
 
-    .contact-box {
+    /* Contact bar */
+    .contact-strip {
       background: var(--surface);
       border: 1px solid var(--line);
       border-left: 4px solid var(--accent);
-      padding: 20px 22px;
+      padding: 22px 24px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 18px;
     }
 
-    .contact-box h3 {
+    .contact-strip h3 {
       font-family: var(--display);
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
     }
 
-    .contact-box p {
-      font-size: 0.86rem;
+    .contact-strip p {
+      font-size: 0.88rem;
       color: var(--muted);
     }
 
-    .copy-btns {
+    .copy-group {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -796,8 +634,8 @@
 
     .copy-btn {
       font-family: var(--mono);
-      font-size: 0.76rem;
-      padding: 8px 13px;
+      font-size: 0.78rem;
+      padding: 9px 14px;
       background: var(--bg);
       border: 1px solid var(--line-strong);
       color: var(--ink);
@@ -809,10 +647,9 @@
     }
 
     footer {
-      border-top: 1px solid var(--line);
-      padding-top: 20px;
+      padding: 24px 0 40px;
       font-family: var(--mono);
-      font-size: 0.74rem;
+      font-size: 0.75rem;
       color: var(--dim);
       display: flex;
       flex-wrap: wrap;
@@ -829,427 +666,372 @@
       color: var(--ink);
       font-family: var(--mono);
       font-size: 0.78rem;
-      padding: 8px 14px;
+      padding: 9px 14px;
       display: none;
       z-index: 50;
     }
 
     .toast.show { display: block; }
 
-    @media (max-width: 1180px) {
-      .carousel-track { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .archive-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 1020px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .roster-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
-    @media (max-width: 900px) {
-      .shell { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
-      .mobile-bar { display: flex; }
-      .hero-strip { grid-template-columns: 1fr; }
-      .carousel-track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 580px) {
-      .carousel-track, .archive-grid, .kv { grid-template-columns: 1fr; }
-      .slide-card { aspect-ratio: auto; min-height: 240px; }
+    @media (max-width: 720px) {
+      .hero { padding: 72px 0 48px; }
+      .roster-grid, .kv { grid-template-columns: 1fr; }
+      .nav, .top-actions .pill-btn:not(.amber) { display: none; }
     }
   </style>
 </head>
 <body>
-  <header class="mobile-bar">
-    <a href="#" class="brand-title">fryedcheese</a>
-    <div style="display: flex; gap: 8px;">
-      <a href="#projects" class="fbtn">projects</a>
-      <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="fbtn active">github (12)</a>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="#" class="brand">
+        <span class="brand-mark"><i>FC</i></span>
+        <span>fryedcheese</span>
+        <span class="sub">fryedcheese.dpdns.org</span>
+      </a>
+      <nav class="nav">
+        <a href="#projects">projects</a>
+        <a href="#setup">stack</a>
+        <a href="#contact">contact</a>
+      </nav>
+      <div class="top-actions">
+        <a href="https://crispylauncher.web-mc1.workers.dev/" target="_blank" rel="noopener" class="pill-btn">
+          <span>launcher site</span>
+        </a>
+        <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="pill-btn amber">
+          <span>github (12)</span>
+        </a>
+      </div>
     </div>
   </header>
 
-  <div class="shell">
-    <aside class="sidebar">
-      <div>
-        <div class="logo-wrap">
-          <div class="emblem"></div>
-          <div>
-            <div class="brand-title">fryedcheese</div>
-            <div class="brand-domain">fryedcheese.dpdns.org</div>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow">
+            <span class="skew-tag"><span>gaming &amp; dev</span></span>
+            <span>launchers · .hmod mods · smps · 2d games</span>
           </div>
-        </div>
-
-        <nav class="side-nav" style="margin-top: 28px;">
-          <a href="#carousel">carousel</a>
-          <a href="#projects">projects (12)</a>
-          <a href="#setup">stack</a>
-          <a href="#contact">contact</a>
-        </nav>
-      </div>
-
-      <div class="side-foot">
-        <a href="https://crispylauncher.web-mc1.workers.dev/" target="_blank" rel="noopener" class="side-btn">launcher site ↗</a>
-        <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="side-btn amber">github (12) ↗</a>
-      </div>
-    </aside>
-
-    <main class="stage">
-      <section id="carousel" class="carousel-sec">
-        <div class="carousel-head">
-          <h2 class="carousel-title">portfolio carousel</h2>
-          <div class="carousel-controls">
-            <button class="fbtn active" data-filter="all">all</button>
-            <button class="fbtn" data-filter="mc">mc / .hmod</button>
-            <button class="fbtn" data-filter="games">games</button>
-            <button class="fbtn" data-filter="tools">tools</button>
-            <button class="nav-arrow" id="prev-slide" aria-label="Previous project">←</button>
-            <button class="nav-arrow" id="next-slide" aria-label="Next project">→</button>
-          </div>
-        </div>
-
-        <div class="carousel-track" id="carousel-track">
-          <article class="slide-card" data-cat="tools mc">
-            <div class="slide-art art-1"></div>
-            <div class="slide-overlay">
-              <div class="slide-meta">
-                <span class="slide-idx">01 / 05</span>
-                <span class="slide-badge">v0.3.0</span>
-              </div>
-              <h3>Crispy Launcher</h3>
-              <p>electron &amp; node.js launcher with microsoft login and modrinth search.</p>
-              <div class="slide-foot">
-                <span>launcher</span>
-                <a class="slide-link" href="https://crispylauncher.web-mc1.workers.dev/" target="_blank" rel="noopener">open ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="slide-card" data-cat="mc">
-            <div class="slide-art art-2"></div>
-            <div class="slide-overlay">
-              <div class="slide-meta">
-                <span class="slide-idx">02 / 05</span>
-                <span class="slide-badge wip">rust / .hmod</span>
-              </div>
-              <h3>WaypointsAndMap</h3>
-              <p>.hmod mod &amp; horizon forks across horizon-FryedCheesefork and Plugin-Horizon.</p>
-              <div class="slide-foot">
-                <span>horizon</span>
-                <a class="slide-link" href="https://github.com/Plugin-Horizon" target="_blank" rel="noopener">repo ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="slide-card" data-cat="tools">
-            <div class="slide-art art-3"></div>
-            <div class="slide-overlay">
-              <div class="slide-meta">
-                <span class="slide-idx">03 / 05</span>
-                <span class="slide-badge">kiwihacks</span>
-              </div>
-              <h3>S.H.E.R.M.A.N.</h3>
-              <p>orbital satellite tracker built with cesium.js, satellite-js &amp; space-track.</p>
-              <div class="slide-foot">
-                <span>satellite</span>
-                <a class="slide-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="slide-card" data-cat="games">
-            <div class="slide-art art-4"></div>
-            <div class="slide-overlay">
-              <div class="slide-meta">
-                <span class="slide-idx">04 / 05</span>
-                <span class="slide-badge">itch.io</span>
-              </div>
-              <h3>Overhook</h3>
-              <p>2d grappling platformer for windows, mac, linux &amp; web on itch.io.</p>
-              <div class="slide-foot">
-                <span>2d game</span>
-                <a class="slide-link" href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener">play ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="slide-card" data-cat="mc games">
-            <div class="slide-art art-5"></div>
-            <div class="slide-overlay">
-              <div class="slide-meta">
-                <span class="slide-idx">05 / 05</span>
-                <span class="slide-badge">smp &amp; mods</span>
-              </div>
-              <h3>CrispySprings &amp; Mods</h3>
-              <p>smp servers, fryedCheese_red pack, lifehood pack &amp; cobblestone-to-sand datapack.</p>
-              <div class="slide-foot">
-                <span>minecraft</span>
-                <a class="slide-link" href="#projects">all 12 ↓</a>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <p class="carousel-caption">
-          a showcase of featured builds, mods, games &amp; tools in the fryedcheese portfolio · use arrows to cycle order
-        </p>
-      </section>
-
-      <section class="hero-strip">
-        <div class="hero-copy">
-          <span class="skew-tag"><span>fryedcheese</span></span>
-          <h1>launchers, <em>.hmod</em> mods, smps &amp; 2d games</h1>
+          <h1>
+            built for <span class="amber">play</span> &amp; <span class="stroke">custom</span> builds
+          </h1>
           <p>
-            i build minecraft launchers, write mods and forks for horizon, track satellites for hackathons, run smp servers, mess with local voice stuff on linux, and release 2d games on itch.io.
+            i'm fryedcheese. i build minecraft launchers, write mods and forks for horizon, track satellites for hackathons, run smp servers, mess with local voice stuff on linux, and put 2d games up on itch.io.
           </p>
-          <div class="hero-actions">
+          <div class="hero-cta">
             <a href="#projects" class="cta-btn primary"><span>all projects (12)</span></a>
             <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="cta-btn"><span>github.com/FryedCheese</span></a>
             <a href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener" class="cta-btn"><span>overhook on itch.io</span></a>
           </div>
         </div>
 
-        <aside class="launcher-card">
-          <div>
-            <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--accent); margin-bottom: 4px;">FEATURED RELEASE · v0.3.0</div>
-            <h2>Crispy Launcher</h2>
-            <p>electron &amp; node.js launcher with microsoft auth, modrinth browsing, and updates.</p>
+        <aside class="featured-card">
+          <div class="fc-head">
+            <span class="live-badge"><span class="live-dot"></span>crispy launcher</span>
+            <span class="fc-ver">BUILD v0.3.0</span>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="dl-tabs">
-              <button class="dl-tab active" data-build="win">windows</button>
-              <button class="dl-tab" data-build="linux">linux</button>
-              <button class="dl-tab" data-build="web">website</button>
-            </div>
-            <div class="dl-row">
-              <span id="build-file">Crispy-Launcher-Setup-0.3.0.exe</span>
-              <a id="build-url" href="https://crispylauncher.web-mc1.workers.dev/" target="_blank" rel="noopener">website ↗</a>
-            </div>
+          <h2>Crispy Launcher</h2>
+          <p>electron &amp; node.js minecraft launcher with microsoft auth, modrinth browsing, and updates.</p>
+          <div class="dl-tabs">
+            <button class="dl-tab active" data-build="win">windows</button>
+            <button class="dl-tab" data-build="linux">linux</button>
+            <button class="dl-tab" data-build="web">website</button>
+          </div>
+          <div class="dl-box">
+            <span id="build-file">Crispy-Launcher-Setup-0.3.0.exe</span>
+            <a id="build-url" href="https://crispylauncher.web-mc1.workers.dev/" target="_blank" rel="noopener">website ↗</a>
           </div>
         </aside>
-      </section>
+      </div>
+    </section>
 
-      <section id="projects">
-        <div class="sec-head">
-          <h2>all <em>projects</em> &amp; repos</h2>
-          <span>12 entries</span>
-        </div>
+    <section id="projects" class="sec">
+      <div class="sec-bar">
+        <h2>active <em>projects</em> &amp; repos</h2>
+        <span class="sec-meta">12 entries · filter by category</span>
+      </div>
 
-        <div class="archive-grid">
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#01</span><span>v0.3.0</span></div>
-              <h3>Crispy Launcher</h3>
-              <p>electron &amp; node.js launcher with microsoft auth and modrinth search.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">electron</span><span class="tag">node.js</span></div>
-              <a class="slide-link" href="https://crispylauncher.web-mc1.workers.dev/" target="_blank" rel="noopener">website ↗</a>
-            </div>
-          </article>
+      <div class="filters">
+        <button class="fbtn active" data-f="all">all (12)</button>
+        <button class="fbtn" data-f="mc">minecraft &amp; smp</button>
+        <button class="fbtn" data-f="tools">apps &amp; tools</button>
+        <button class="fbtn" data-f="games">games &amp; audio</button>
+      </div>
 
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#02</span><span>rust / .hmod</span></div>
-              <h3>WaypointsAndMap &amp; Horizon</h3>
-              <p>.hmod mod package, shaders, and horizon-FryedCheesefork / Plugin-Horizon.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">rust</span><span class="tag">.hmod</span></div>
-              <a class="slide-link" href="https://github.com/Plugin-Horizon" target="_blank" rel="noopener">repo ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#03</span><span>kiwihacks</span></div>
-              <h3>S.H.E.R.M.A.N.</h3>
-              <p>satellite tracker for kiwihacks using cesium.js, satellite-js &amp; space-track.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">cesium.js</span><span class="tag">satellite-js</span></div>
-              <a class="slide-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#04</span><span>itch.io</span></div>
-              <h3>Overhook</h3>
-              <p>2d grappling platformer for windows, mac, linux &amp; web on itch.io.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">2d platformer</span><span class="tag">html5</span></div>
-              <a class="slide-link" href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener">itch.io ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#05</span><span>web</span></div>
-              <h3>MineMath</h3>
-              <p>minecraft survival calculator for portals, stacks, and xp.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">html</span><span class="tag">css</span><span class="tag">js</span></div>
-              <a class="slide-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#06</span><span>in progress</span></div>
-              <h3>J.A.R.V.I.S.</h3>
-              <p>local voice assistant on linux using faster-whisper and ollama.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">python</span><span class="tag">ollama</span></div>
-              <a class="slide-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#07</span><span>smp</span></div>
-              <h3>CrispySprings SMP &amp; CheeseWhiz</h3>
-              <p>smp servers, discord-to-minecraft ticket/sync bridges, paper/folia/amp.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">paper/folia</span><span class="tag">tailscale</span></div>
-              <a class="slide-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#08</span><span>modrinth</span></div>
-              <h3>fryedCheese_red &amp; Grate Minds</h3>
-              <p>fryedCheese_red resource pack, lifehood pack &amp; cobblestone-to-sand datapack.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">resource pack</span><span class="tag">data pack</span></div>
-              <a class="slide-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#09</span><span>building</span></div>
-              <h3>Discord C&amp;C Hub</h3>
-              <p>central discord hub for webhook logs, bot status checks, and announcements.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">discord</span><span class="tag">webhooks</span></div>
-              <a class="slide-link" href="#contact">contact ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#10</span><span>concept</span></div>
-              <h3>Alloy Platform</h3>
-              <p>multiplayer game platform idea with alloy currency, trading &amp; avatar wardrobe.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">lua</span><span class="tag">c++</span><span class="tag">alloy</span></div>
-              <a class="slide-link" href="#contact">contact ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#11</span><span>released</span></div>
-              <h3>Visual Novel Music</h3>
-              <p>music for a spooktober visual novel jam project on itch.io.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">music</span><span class="tag">itch.io</span></div>
-              <a class="slide-link" href="https://fryedcheese.itch.io" target="_blank" rel="noopener">itch.io ↗</a>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <div>
-              <div class="proj-top"><span>#12</span><span>youtube</span></div>
-              <h3>@fryed_cheese</h3>
-              <p>youtube videos &amp; shorts covering crispy launcher, mods, and games.</p>
-            </div>
-            <div class="proj-foot">
-              <div class="tags"><span class="tag">youtube</span><span class="tag">obs</span></div>
-              <a class="slide-link" href="https://www.youtube.com/@fryed_cheese" target="_blank" rel="noopener">youtube ↗</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="setup">
-        <div class="setup-box">
-          <h3>code &amp; github</h3>
-          <ul class="kv">
-            <li><span class="k">languages</span><span class="v">rust, c++, lua, python, js/html/css</span></li>
-            <li><span class="k">github</span><span class="v">12 repos · pull shark x2 · pair</span></li>
-            <li><span class="k">orgs &amp; alt</span><span class="v">Plugin-Horizon · Web-mc1</span></li>
-            <li><span class="k">hosting</span><span class="v">github pages · workers · tailscale</span></li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="contact">
-        <div class="contact-box">
+      <div class="roster-grid">
+        <article class="card" data-f="tools mc">
           <div>
-            <h3>contact</h3>
-            <p>questions, launcher stuff, or business inquiries.</p>
+            <div class="card-top">
+              <span class="card-num">#01</span>
+              <span class="card-status">v0.3.0</span>
+            </div>
+            <h3>Crispy Launcher</h3>
+            <p>electron &amp; node.js minecraft launcher with microsoft auth and modrinth search.</p>
           </div>
-          <div class="copy-btns">
-            <button class="copy-btn" data-copy="fryedcheese">discord: fryedcheese</button>
-            <button class="copy-btn" data-copy="etienne.gauchet.yt@gmail.com">email: etienne.gauchet.yt@gmail.com</button>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">electron</span>
+              <span class="tag">node.js</span>
+              <span class="tag">workers</span>
+            </div>
+            <a class="card-link" href="https://crispylauncher.web-mc1.workers.dev/" target="_blank" rel="noopener">website ↗</a>
           </div>
-        </div>
-      </section>
+        </article>
 
-      <footer>
-        <span>fryedcheese · fryedcheese.dpdns.org</span>
-        <span>github pages + digitalplat</span>
-      </footer>
-    </main>
-  </div>
+        <article class="card" data-f="mc">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#02</span>
+              <span class="card-status wip">rust / .hmod</span>
+            </div>
+            <h3>WaypointsAndMap &amp; Horizon</h3>
+            <p>.hmod mod package, shaders, and horizon-FryedCheesefork / Plugin-Horizon.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">rust</span>
+              <span class="tag">.hmod</span>
+              <span class="tag">Plugin-Horizon</span>
+            </div>
+            <a class="card-link" href="https://github.com/Plugin-Horizon" target="_blank" rel="noopener">repo ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="tools">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#03</span>
+              <span class="card-status">kiwihacks</span>
+            </div>
+            <h3>S.H.E.R.M.A.N.</h3>
+            <p>satellite tracker for kiwihacks using cesium.js, satellite-js &amp; space-track.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">cesium.js</span>
+              <span class="tag">satellite-js</span>
+              <span class="tag">space-track</span>
+            </div>
+            <a class="card-link" href="https://github.com/FryedCheese/S.H.E.R.M.A.N" target="_blank" rel="noopener">github ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="games">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#04</span>
+              <span class="card-status">itch.io</span>
+            </div>
+            <h3>Overhook</h3>
+            <p>2d grappling platformer for windows, mac, linux &amp; web on itch.io.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">2d platformer</span>
+              <span class="tag">html5 / desktop</span>
+            </div>
+            <a class="card-link" href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener">itch.io ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="mc tools">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#05</span>
+              <span class="card-status">web</span>
+            </div>
+            <h3>MineMath</h3>
+            <p>minecraft survival calculator for portals, stacks, and xp.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">html</span>
+              <span class="tag">css</span>
+              <span class="tag">js</span>
+            </div>
+            <a class="card-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="tools">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#06</span>
+              <span class="card-status wip">in progress</span>
+            </div>
+            <h3>J.A.R.V.I.S.</h3>
+            <p>local voice assistant on linux using faster-whisper and ollama.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">python</span>
+              <span class="tag">faster-whisper</span>
+              <span class="tag">ollama</span>
+            </div>
+            <a class="card-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="mc">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#07</span>
+              <span class="card-status">smp</span>
+            </div>
+            <h3>CrispySprings SMP &amp; CheeseWhiz</h3>
+            <p>smp servers, discord-to-minecraft ticket/sync bridges, paper/folia/amp.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">paper / folia</span>
+              <span class="tag">luckperms</span>
+              <span class="tag">tailscale</span>
+            </div>
+            <a class="card-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="mc">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#08</span>
+              <span class="card-status">modrinth</span>
+            </div>
+            <h3>fryedCheese_red &amp; Grate Minds</h3>
+            <p>fryedCheese_red resource pack, lifehood pack &amp; cobblestone-to-sand datapack.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">resource pack</span>
+              <span class="tag">data pack</span>
+              <span class="tag">grate minds</span>
+            </div>
+            <a class="card-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="tools">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#09</span>
+              <span class="card-status wip">building</span>
+            </div>
+            <h3>Discord C&amp;C Hub</h3>
+            <p>central discord hub for webhook logs, bot status checks, and announcements.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">discord</span>
+              <span class="tag">webhooks</span>
+              <span class="tag">node.js</span>
+            </div>
+            <a class="card-link" href="#contact">contact ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="games">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#10</span>
+              <span class="card-status wip">concept</span>
+            </div>
+            <h3>Alloy Platform</h3>
+            <p>multiplayer game platform idea with alloy currency, trading &amp; avatar wardrobe.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">lua</span>
+              <span class="tag">c++</span>
+              <span class="tag">alloy</span>
+            </div>
+            <a class="card-link" href="#contact">contact ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="games">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#11</span>
+              <span class="card-status">released</span>
+            </div>
+            <h3>Visual Novel Music</h3>
+            <p>music for a spooktober visual novel jam project on itch.io.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">music</span>
+              <span class="tag">vn jam</span>
+              <span class="tag">itch.io</span>
+            </div>
+            <a class="card-link" href="https://fryedcheese.itch.io" target="_blank" rel="noopener">itch.io ↗</a>
+          </div>
+        </article>
+
+        <article class="card" data-f="tools games">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#12</span>
+              <span class="card-status">youtube</span>
+            </div>
+            <h3>@fryed_cheese</h3>
+            <p>youtube videos &amp; shorts covering crispy launcher, mods, and games.</p>
+          </div>
+          <div class="card-foot">
+            <div class="tags">
+              <span class="tag">youtube</span>
+              <span class="tag">obs</span>
+              <span class="tag">showcases</span>
+            </div>
+            <a class="card-link" href="https://www.youtube.com/@fryed_cheese" target="_blank" rel="noopener">youtube ↗</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="setup" class="sec">
+      <div class="sec-bar">
+        <h2>languages &amp; <em>github</em></h2>
+        <span class="sec-meta">code &amp; hosting</span>
+      </div>
+
+      <div class="setup-panel">
+        <h3>code &amp; github</h3>
+        <ul class="kv">
+          <li><span class="k">languages</span><span class="v">rust, c++, lua, python, js/html/css</span></li>
+          <li><span class="k">github</span><span class="v">12 repos · pull shark x2 · pair</span></li>
+          <li><span class="k">orgs &amp; alt</span><span class="v">Plugin-Horizon · Web-mc1</span></li>
+          <li><span class="k">hosting</span><span class="v">github pages · workers · tailscale</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="sec" style="border-bottom: none; padding-bottom: 16px;">
+      <div class="contact-strip">
+        <div>
+          <h3>contact</h3>
+          <p>questions, launcher stuff, or business inquiries.</p>
+        </div>
+        <div class="copy-group">
+          <button class="copy-btn" data-copy="fryedcheese">discord: fryedcheese</button>
+          <button class="copy-btn" data-copy="etienne.gauchet.yt@gmail.com">email: etienne.gauchet.yt@gmail.com</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span>fryedcheese · fryedcheese.dpdns.org</span>
+    <span>github pages + digitalplat</span>
+  </footer>
 
   <div class="toast" id="toast">copied</div>
 
   <script>
-    const track = document.getElementById("carousel-track");
-    const cards = Array.from(track.querySelectorAll(".slide-card"));
-
-    function refreshIndices() {
-      const visible = cards.filter((c) => c.style.display !== "none");
-      visible.forEach((c, i) => {
-        const idx = c.querySelector(".slide-idx");
-        if (idx) {
-          idx.textContent = `${String(i + 1).padStart(2, "0")} / ${String(visible.length).padStart(2, "0")}`;
-        }
-      });
-    }
-
-    document.getElementById("next-slide").addEventListener("click", () => {
-      const first = track.firstElementChild;
-      if (first) track.appendChild(first);
-      refreshIndices();
-    });
-
-    document.getElementById("prev-slide").addEventListener("click", () => {
-      const last = track.lastElementChild;
-      if (last) track.prepend(last);
-      refreshIndices();
-    });
-
-    document.querySelectorAll(".carousel-controls .fbtn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".carousel-controls .fbtn").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const filter = btn.dataset.filter;
-        cards.forEach((card) => {
-          const cats = card.dataset.cat.split(" ");
-          card.style.display = filter === "all" || cats.includes(filter) ? "flex" : "none";
-        });
-        refreshIndices();
-      });
-    });
-
     const builds = {
       win: { name: "Crispy-Launcher-Setup-0.3.0.exe", href: "https://crispylauncher.web-mc1.workers.dev/", label: "website ↗" },
       linux: { name: "Crispy Launcher (Linux build)", href: "https://crispylauncher.web-mc1.workers.dev/", label: "website ↗" },
@@ -1265,6 +1047,18 @@
         const link = document.getElementById("build-url");
         link.href = b.href;
         link.textContent = b.label;
+      });
+    });
+
+    document.querySelectorAll(".fbtn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".fbtn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const f = btn.dataset.f;
+        document.querySelectorAll(".card").forEach((card) => {
+          const cats = card.dataset.f.split(" ");
+          card.style.display = f === "all" || cats.includes(f) ? "flex" : "none";
+        });
       });
     });
 
