@@ -3,638 +3,455 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FryedCheese — Launchers, Mods, Games &amp; Projects</title>
-  <meta name="description" content="FryedCheese (Étienne Gauchet) — Crispy Launcher, Horizon .hmod plugins, S.H.E.R.M.A.N., Overhook, MineMath, J.A.R.V.I.S., and CrispySprings SMP." />
+  <title>fryedcheese — projects &amp; stuff</title>
   <style>
     :root {
-      --bg-root: #090a0d;
-      --bg-surface: #111318;
-      --bg-elevated: #171a21;
-      --bg-hover: #1e222b;
-      --border: #232733;
-      --border-strong: #343a4b;
-      --text-primary: #f4f6fb;
-      --text-secondary: #9ba3b4;
-      --text-muted: #646c7d;
-      --accent: #f59e0b;
-      --accent-bright: #fbbf24;
-      --accent-orange: #ea580c;
-      --accent-dim: rgba(245, 158, 11, 0.14);
-      --green: #10b981;
-      --green-dim: rgba(16, 185, 129, 0.14);
-      --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-      --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --bg: #12110f;
+      --panel: #191815;
+      --panel-2: #211f1b;
+      --line: #2d2a24;
+      --line-soft: #23201b;
+      --ink: #ece8df;
+      --muted: #a69f92;
+      --dim: #736d62;
+      --amber: #e6951c;
+      --amber-soft: rgba(230, 149, 28, 0.14);
+      --rust: #c95b28;
+      --ok: #5da678;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
-      scroll-behavior: smooth;
-      background-color: var(--bg-root);
-      color: var(--text-primary);
-      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
       line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
     }
 
     body {
-      background-color: var(--bg-root);
-      background-image:
-        radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 48%),
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 48px 48px, 48px 48px;
+      background: var(--bg);
       min-height: 100vh;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
 
-    button {
-      font-family: inherit;
-      cursor: pointer;
-    }
-
-    .container {
-      max-width: 1120px;
+    .wrap {
+      max-width: 960px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;
     }
 
-    /* Navigation */
-    header {
+    /* Top bar */
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: #12110f;
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(9, 10, 13, 0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
+      z-index: 20;
     }
 
-    .nav-inner {
+    .topbar-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
+      height: 54px;
+      gap: 16px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .site-id {
+      font-family: var(--mono);
+      font-size: 0.9rem;
       font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-mark {
-      width: 26px;
-      height: 26px;
-      background: linear-gradient(135deg, var(--accent-bright), var(--accent-orange));
-      border-radius: 6px;
-      display: grid;
-      place-items: center;
-      color: #090a0d;
-      font-family: var(--font-mono);
-      font-weight: 800;
-      font-size: 0.8rem;
-      box-shadow: 0 0 18px rgba(245, 158, 11, 0.35);
-    }
-
-    .brand-tag {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      padding: 2px 7px;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      background: var(--bg-surface);
-    }
-
-    nav.nav-links {
+      color: var(--ink);
       display: flex;
       align-items: center;
-      gap: 28px;
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-    }
-
-    nav.nav-links a:hover {
-      color: var(--text-primary);
-    }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
       gap: 8px;
-      padding: 7px 14px;
-      border-radius: 7px;
-      font-size: 0.84rem;
-      font-weight: 600;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-strong);
-      color: var(--text-primary);
-      transition: all 0.16s ease;
     }
 
-    .nav-cta:hover {
-      border-color: var(--accent);
-      color: var(--accent-bright);
+    .site-id .domain {
+      color: var(--amber);
+      font-weight: 500;
     }
 
-    /* Hero */
-    .hero {
-      padding: 76px 0 56px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .status-pill {
-      display: inline-flex;
+    .topnav {
+      display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
+      gap: 18px;
+      font-size: 0.86rem;
+      color: var(--muted);
     }
 
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 10px var(--green);
+    .topnav a:hover { color: var(--ink); }
+
+    .gh-pill {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
     }
 
-    .hero h1 {
-      font-size: clamp(2.4rem, 5.2vw, 4rem);
+    .gh-pill:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    /* Main layout */
+    main { padding: 36px 0 64px; }
+
+    .intro {
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+    }
+
+    .intro-kicker {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--dim);
+      margin-bottom: 10px;
+    }
+
+    .intro h1 {
+      font-size: clamp(1.85rem, 4vw, 2.65rem);
       font-weight: 800;
-      letter-spacing: -0.035em;
-      line-height: 1.07;
-      max-width: 820px;
-      margin-bottom: 20px;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      max-width: 720px;
     }
 
-    .hero h1 span {
-      background: linear-gradient(95deg, var(--accent-bright) 0%, var(--accent-orange) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .intro h1 em {
+      font-style: normal;
+      color: var(--amber);
     }
 
-    .hero-sub {
-      font-size: 1.08rem;
-      color: var(--text-secondary);
+    .intro p {
+      color: var(--muted);
       max-width: 660px;
-      margin-bottom: 32px;
+      font-size: 0.98rem;
+      margin-bottom: 18px;
     }
 
-    .hero-actions {
+    .intro-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 44px;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 11px 20px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
-      color: #090a0d;
-      font-weight: 700;
-      font-size: 0.92rem;
-      border: none;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 26px rgba(245, 158, 11, 0.28);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 11px 18px;
-      border-radius: 8px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
-      color: var(--text-primary);
-      font-weight: 600;
-      font-size: 0.92rem;
-      transition: all 0.15s ease;
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-elevated);
-      border-color: var(--text-muted);
-    }
-
-    /* Featured Release Strip */
-    .release-bar {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 20px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 12px;
-      padding: 22px 24px;
-      align-items: center;
-    }
-
-    .release-meta-top {
-      display: flex;
-      align-items: center;
       gap: 10px;
-      margin-bottom: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
     }
 
-    .badge-amber {
-      background: var(--accent-dim);
-      color: var(--accent-bright);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-weight: 600;
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .release-bar h2 {
-      font-size: 1.18rem;
+    .btn:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    .btn-main {
+      background: var(--amber);
+      color: #14120e;
+      border-color: var(--amber);
+      font-weight: 700;
+    }
+
+    .btn-main:hover {
+      background: #f2a42c;
+      color: #14120e;
+    }
+
+    /* Crispy Launcher box */
+    .launcher-box {
+      margin-top: 22px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .launcher-tag {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--amber);
+      margin-bottom: 4px;
+    }
+
+    .launcher-box h2 {
+      font-size: 1.08rem;
       font-weight: 700;
       margin-bottom: 4px;
     }
 
-    .release-bar p {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-    }
-
-    .os-switcher {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: var(--bg-root);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 12px 14px;
-    }
-
-    .os-tabs {
-      display: flex;
-      gap: 6px;
-    }
-
-    .os-tab {
-      flex: 1;
-      padding: 5px 8px;
-      border-radius: 6px;
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      font-weight: 600;
-    }
-
-    .os-tab.active {
-      background: var(--bg-elevated);
-      border-color: var(--border-strong);
-      color: var(--accent-bright);
-    }
-
-    .os-cmd {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--text-primary);
-      background: var(--bg-surface);
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-    }
-
-    /* Section Headers */
-    section {
-      padding: 68px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-bright);
-      margin-bottom: 8px;
-    }
-
-    .section-header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(1.6rem, 3vw, 2.15rem);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-    }
-
-    .section-header p {
-      color: var(--text-secondary);
-      max-width: 540px;
-      font-size: 0.94rem;
-    }
-
-    /* Interactive Project Spotlight Comparator */
-    .bench-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .bench-mode-btn {
-      padding: 7px 13px;
-      border-radius: 7px;
-      border: 1px solid var(--border-strong);
-      background: var(--bg-surface);
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    .bench-mode-btn.active {
-      background: var(--accent-dim);
-      border-color: var(--accent);
-      color: var(--accent-bright);
-    }
-
-    .comparator-wrap {
-      position: relative;
-      height: 290px;
-      border-radius: 12px;
-      border: 1px solid var(--border-strong);
-      overflow: hidden;
-      background: var(--bg-surface);
-      user-select: none;
-    }
-
-    .comp-pane {
-      position: absolute;
-      inset: 0;
-      padding: 28px 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .comp-right {
-      background: linear-gradient(135deg, #13161d 0%, #0d0f14 100%);
-    }
-
-    .comp-left {
-      background: linear-gradient(135deg, #1b160e 0%, #111318 100%);
-      clip-path: inset(0 45% 0 0);
-      border-right: 2px solid var(--accent-bright);
-    }
-
-    .comp-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      padding: 4px 10px;
-      border-radius: 5px;
-      width: fit-content;
-    }
-
-    .comp-left .comp-label {
-      background: var(--accent-dim);
-      color: var(--accent-bright);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-    }
-
-    .comp-right .comp-label {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-strong);
-      margin-left: auto;
-    }
-
-    .comp-big {
-      font-family: var(--font-mono);
-      font-size: clamp(2rem, 4.2vw, 3.1rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
-
-    .comp-left .comp-big {
-      color: var(--accent-bright);
-    }
-
-    .comp-right .comp-big {
-      color: var(--text-secondary);
-      text-align: right;
-    }
-
-    .comp-sub {
+    .launcher-box p {
+      margin: 0;
       font-size: 0.86rem;
-      color: var(--text-secondary);
-      max-width: 360px;
+      color: var(--muted);
     }
 
-    .comp-right .comp-sub {
-      text-align: right;
-      margin-left: auto;
-    }
-
-    .comp-divider {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 55%;
-      width: 2px;
-      background: var(--accent-bright);
-      box-shadow: 0 0 18px rgba(251, 191, 36, 0.7);
-      pointer-events: none;
-    }
-
-    .comp-handle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--bg-root);
-      border: 2px solid var(--accent-bright);
-      color: var(--accent-bright);
-      display: grid;
-      place-items: center;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 800;
-    }
-
-    .comp-range {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: ew-resize;
-      z-index: 5;
-    }
-
-    /* Numbered Subsystem / Project Ledger (01 - 12) */
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .filter-btn {
-      padding: 6px 13px;
-      border-radius: 6px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      transition: all 0.15s ease;
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      border-color: var(--accent);
-      color: var(--accent-bright);
-      background: var(--accent-dim);
-    }
-
-    .ledger {
-      border: 1px solid var(--border-strong);
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-surface);
-    }
-
-    .ledger-row {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.15s ease;
-    }
-
-    .ledger-row:last-child {
-      border-bottom: none;
-    }
-
-    .ledger-row:hover {
-      background: var(--bg-elevated);
-    }
-
-    .ledger-main {
-      display: grid;
-      grid-template-columns: 54px 1.25fr 1.65fr auto;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      cursor: pointer;
-    }
-
-    .ledger-num {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-weight: 700;
-    }
-
-    .ledger-title-wrap {
+    .dl-panel {
+      background: var(--bg);
+      border: 1px solid var(--line-soft);
+      padding: 10px;
       display: flex;
       flex-direction: column;
-      gap: 2px;
-    }
-
-    .ledger-title {
-      font-weight: 700;
-      font-size: 0.98rem;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
       gap: 8px;
     }
 
-    .ledger-repo {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
+    .dl-tabs {
+      display: flex;
+      gap: 4px;
     }
 
-    .ledger-desc {
-      font-size: 0.87rem;
-      color: var(--text-secondary);
+    .dl-tab {
+      flex: 1;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      padding: 5px 6px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--muted);
     }
 
-    .ledger-right {
+    .dl-tab.active {
+      background: var(--panel-2);
+      border-color: var(--line);
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    .dl-row {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      background: var(--panel);
+      border: 1px solid var(--line-soft);
+      padding: 7px 10px;
     }
 
-    .pill-status {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      padding: 3px 8px;
-      border-radius: 4px;
+    .dl-row a {
+      color: var(--amber);
       font-weight: 600;
       white-space: nowrap;
     }
 
-    .status-live {
-      background: var(--green-dim);
-      color: var(--green);
-      border: 1px solid rgba(16, 185, 129, 0.3);
+    /* Sections */
+    .sec {
+      margin-bottom: 44px;
     }
 
-    .status-active {
-      background: var(--accent-dim);
-      color: var(--accent-bright);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+    .sec-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .ledger-details {
+    .sec-top h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .sec-top span {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--dim);
+    }
+
+    /* Filter tabs */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .fbtn {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      padding: 5px 10px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .fbtn:hover,
+    .fbtn.active {
+      border-color: var(--amber);
+      color: var(--amber);
+      background: var(--amber-soft);
+    }
+
+    /* Project table/list */
+    .proj-list {
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .proj-item {
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .proj-item:last-child {
+      border-bottom: none;
+    }
+
+    .proj-head {
+      display: grid;
+      grid-template-columns: 38px 185px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      cursor: pointer;
+    }
+
+    .proj-head:hover {
+      background: var(--panel-2);
+    }
+
+    .proj-idx {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--dim);
+    }
+
+    .proj-name {
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .proj-summary {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .proj-state {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ok);
+      white-space: nowrap;
+    }
+
+    .proj-state.wip {
+      color: var(--amber);
+    }
+
+    .proj-body {
       display: none;
-      padding: 0 20px 18px 90px;
-      border-top: 1px dashed var(--border);
-      padding-top: 14px;
-      background: rgba(9, 10, 13, 0.45);
+      padding: 10px 14px 14px 50px;
+      background: #151411;
+      border-top: 1px dashed var(--line-soft);
+      font-size: 0.82rem;
+      color: var(--muted);
     }
 
-    .ledger-row.open .ledger-details {
+    .proj-item.open .proj-body {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    .proj-ext {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--amber);
+    }
+
+    .proj-ext:hover { text-decoration: underline; }
+
+    /* Two-column notes & setup */
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 16px;
+    }
+
+    .box h3 {
+      font-family: var(--mono);
+      font-size: 0.84rem;
+      color: var(--amber);
+      margin-bottom: 10px;
+      text-transform: lowercase;
+    }
+
+    .kv {
+      list-style: none;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .kv li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .kv li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kv .k { color: var(--muted); }
+    .kv .v { color: var(--ink); text-align: right; }
+
+    /* Contact strip */
+    .contact-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 16px 18px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -642,773 +459,439 @@
       gap: 14px;
     }
 
-    .tech-tags {
+    .contact-box p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .copy-btns {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .tech-tag {
-      font-family: var(--font-mono);
-      font-size: 0.73rem;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-strong);
-      color: var(--text-secondary);
-    }
-
-    .ledger-link {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--accent-bright);
-      font-weight: 600;
-    }
-
-    .ledger-link:hover {
-      text-decoration: underline;
-    }
-
-    /* Stack & Hardware Grid */
-    .open-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .open-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 12px;
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .open-card h3 {
-      font-size: 1.02rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .open-card p {
-      font-size: 0.87rem;
-      color: var(--text-secondary);
-    }
-
-    .stat-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
       gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-    }
-
-    .stat-list li {
-      display: flex;
-      justify-content: space-between;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .stat-list li:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .stat-val {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    /* Contact & Footer */
-    .contact-strip {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 12px;
-      padding: 24px 28px;
-    }
-
-    .copy-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
     }
 
     .copy-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 14px;
-      border-radius: 8px;
-      background: var(--bg-root);
-      border: 1px solid var(--border-strong);
-      color: var(--text-primary);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      transition: border-color 0.15s ease;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      padding: 7px 11px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink);
     }
 
     .copy-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent-bright);
+      border-color: var(--amber);
+      color: var(--amber);
     }
 
     footer {
-      padding: 32px 0 48px;
-      color: var(--text-muted);
-      font-size: 0.82rem;
+      border-top: 1px solid var(--line);
+      padding: 18px 0 36px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--dim);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .toast {
+    .copied-msg {
       position: fixed;
-      bottom: 22px;
-      right: 22px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--accent);
-      color: var(--text-primary);
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition: all 0.2s ease;
-      z-index: 100;
+      bottom: 16px;
+      right: 16px;
+      background: var(--panel-2);
+      border: 1px solid var(--amber);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      padding: 8px 12px;
+      display: none;
+      z-index: 50;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .copied-msg.show { display: block; }
 
-    @media (max-width: 860px) {
-      .release-bar,
-      .open-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .ledger-main {
-        grid-template-columns: 42px 1fr auto;
-      }
-
-      .ledger-desc {
-        display: none;
-      }
-
-      .ledger-details {
-        padding-left: 20px;
-      }
-
-      nav.nav-links {
-        display: none;
-      }
+    @media (max-width: 760px) {
+      .launcher-box, .cols { grid-template-columns: 1fr; }
+      .proj-head { grid-template-columns: 32px 1fr auto; }
+      .proj-summary { display: none; }
+      .proj-body { padding-left: 14px; }
+      .topnav { display: none; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav-inner">
-      <a href="#" class="brand">
-        <span class="brand-mark">FC</span>
-        <span>FryedCheese</span>
-        <span class="brand-tag">fryedcheese.dpdns.org</span>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="#" class="site-id">
+        <span>fryedcheese</span>
+        <span class="domain">fryedcheese.dpdns.org</span>
       </a>
-      <nav class="nav-links">
-        <a href="#spotlight">Spotlight</a>
-        <a href="#projects">My Projects &amp; Repos</a>
-        <a href="#stack">Stack &amp; Rig</a>
-        <a href="#contact">Contact</a>
+      <nav class="topnav">
+        <a href="#projects">projects</a>
+        <a href="#setup">setup</a>
+        <a href="#contact">contact</a>
       </nav>
-      <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="nav-cta">
-        GitHub (12) ↗
+      <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="gh-pill">
+        github (12)
       </a>
     </div>
   </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <div class="status-pill">
-          <span class="status-dot"></span>
-          <span>Auckland, NZ · FryedCheese · Web-mc1 · Grate Minds</span>
-        </div>
-        <h1>
-          Building <span>Crispy Launcher</span>, .hmod plugins, satellite trackers &amp; indie games.
-        </h1>
-        <p class="hero-sub">
-          I'm Étienne Gauchet (FryedCheese). I build cross-platform desktop launchers, write .hmod packages and Rust forks for Horizon, track orbital satellites with S.H.E.R.M.A.N., run SMP servers, build local Linux voice automation, and ship 2D games on itch.io.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn-primary">Browse All 12 Projects ↓</a>
-          <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="btn-secondary">github.com/FryedCheese ↗</a>
-          <a href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener" class="btn-secondary">Play Overhook ↗</a>
-        </div>
+  <main class="wrap">
+    <section class="intro">
+      <div class="intro-kicker">auckland, nz · etienne gauchet · web-mc1</div>
+      <h1>stuff i build: launchers, <em>.hmod</em> mods, games &amp; tools</h1>
+      <p>
+        i'm fryedcheese. i make minecraft launchers, write mods and forks for horizon, track satellites for hackathons, run smp servers, mess with local voice stuff on linux, and put 2d games up on itch.io.
+      </p>
+      <div class="intro-links">
+        <a href="#projects" class="btn btn-main">all projects (12)</a>
+        <a href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" class="btn">github.com/FryedCheese</a>
+        <a href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener" class="btn">overhook on itch.io</a>
+        <a href="https://www.youtube.com/@fryed_cheese" target="_blank" rel="noopener" class="btn">@fryed_cheese</a>
+      </div>
 
-        <!-- Featured Release Bar (Crispy Launcher - My Own Release) -->
-        <div class="release-bar">
-          <div>
-            <div class="release-meta-top">
-              <span class="badge-amber">MY RELEASE · v0.3.0</span>
-              <span style="color: var(--text-muted);">Electron + Node.js · All Rights Reserved</span>
-            </div>
-            <h2>Crispy Launcher</h2>
-            <p>My custom cross-platform Minecraft launcher featuring Microsoft OAuth login, multi-loader support, built-in Modrinth browsing, and automated updates.</p>
+      <div class="launcher-box">
+        <div>
+          <div class="launcher-tag">crispy launcher · v0.3.0</div>
+          <h2>Crispy Launcher</h2>
+          <p>my minecraft launcher in electron &amp; node.js with microsoft login, modrinth browsing, and updates.</p>
+        </div>
+        <div class="dl-panel">
+          <div class="dl-tabs">
+            <button class="dl-tab active" data-build="win">windows</button>
+            <button class="dl-tab" data-build="linux">linux</button>
+            <button class="dl-tab" data-build="sf">sourceforge</button>
           </div>
-          <div class="os-switcher">
-            <div class="os-tabs">
-              <button class="os-tab active" data-os="win">Windows (.exe)</button>
-              <button class="os-tab" data-os="linux">Linux</button>
-              <button class="os-tab" data-os="web">Web / SourceForge</button>
-            </div>
-            <div class="os-cmd">
-              <span id="os-target">Crispy-Launcher-Setup-0.3.0.exe</span>
-              <a id="os-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener" style="color: var(--accent-bright); font-weight: 700;">View ↗</a>
-            </div>
+          <div class="dl-row">
+            <span id="build-file">Crispy-Launcher-Setup-0.3.0.exe</span>
+            <a id="build-url" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">repo ↗</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive Project Spotlight Comparator (100% FryedCheese Projects) -->
-    <section id="spotlight">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <div class="section-eyebrow">Interactive Project Spotlight</div>
-            <h2>My Flagship Builds Side-by-Side</h2>
-          </div>
-          <p>Drag the divider to switch between my core software, modding, satellite tracking, and game development work.</p>
-        </div>
-
-        <div class="bench-controls">
-          <button class="bench-mode-btn active" data-mode="desktop">Crispy Launcher vs. WaypointsAndMap (.hmod)</button>
-          <button class="bench-mode-btn" data-mode="webgame">S.H.E.R.M.A.N. Tracker vs. Overhook Game</button>
-        </div>
-
-        <div class="comparator-wrap" id="comparator">
-          <div class="comp-pane comp-right">
-            <span class="comp-label" id="right-label">MY HORIZON MOD · PLUGIN-HORIZON</span>
-            <div>
-              <div class="comp-big" id="right-metric">WaypointsAndMap</div>
-              <p class="comp-sub" id="right-desc">Custom .hmod package and Rust fork patches (horizon-FryedCheesefork) built for the Horizon client engine.</p>
-            </div>
-          </div>
-
-          <div class="comp-pane comp-left" id="comp-left">
-            <span class="comp-label" id="left-label">MY LAUNCHER · v0.3.0</span>
-            <div>
-              <div class="comp-big" id="left-metric">Crispy Launcher</div>
-              <p class="comp-sub" id="left-desc">Cross-platform Electron &amp; Node.js launcher with Microsoft auth, Modrinth modpack installs, and Cloudflare Workers landing page.</p>
-            </div>
-          </div>
-
-          <div class="comp-divider" id="comp-divider">
-            <div class="comp-handle">⇄</div>
-          </div>
-          <input type="range" min="8" max="92" value="55" aria-label="Project spotlight slider" class="comp-range" id="comp-range" />
-        </div>
+    <section id="projects" class="sec">
+      <div class="sec-top">
+        <h2>projects &amp; repos</h2>
+        <span>click a row for details</span>
       </div>
-    </section>
 
-    <!-- Numbered Subsystems & Repositories (100% FryedCheese's Stuff) -->
-    <section id="projects">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <div class="section-eyebrow">My Repositories &amp; Projects</div>
-            <h2>Everything I've Built &amp; Shipped</h2>
+      <div class="filters">
+        <button class="fbtn active" data-f="all">all (12)</button>
+        <button class="fbtn" data-f="mc">minecraft &amp; smp</button>
+        <button class="fbtn" data-f="tools">apps &amp; tools</button>
+        <button class="fbtn" data-f="games">games &amp; audio</button>
+      </div>
+
+      <div class="proj-list">
+        <div class="proj-item" data-f="tools mc">
+          <div class="proj-head">
+            <span class="proj-idx">01</span>
+            <span class="proj-name">Crispy Launcher</span>
+            <span class="proj-summary">electron &amp; node.js launcher with microsoft auth and modrinth search</span>
+            <span class="proj-state">v0.3.0</span>
           </div>
-          <p>Click any item to inspect the tech stack, repo/organization, and links.</p>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">electron</span>
+              <span class="tag">node.js</span>
+              <span class="tag">sourceforge</span>
+              <span class="tag">cloudflare workers</span>
+            </div>
+            <a class="proj-ext" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github repos ↗</a>
+          </div>
         </div>
 
-        <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all">All My Work (12)</button>
-          <button class="filter-btn" data-filter="apps">Launchers &amp; Apps</button>
-          <button class="filter-btn" data-filter="minecraft">Minecraft &amp; SMP</button>
-          <button class="filter-btn" data-filter="games">Games &amp; Creative</button>
+        <div class="proj-item" data-f="mc">
+          <div class="proj-head">
+            <span class="proj-idx">02</span>
+            <span class="proj-name">WaypointsAndMap &amp; Horizon</span>
+            <span class="proj-summary">.hmod mod package, shaders, and horizon-FryedCheesefork / Plugin-Horizon</span>
+            <span class="proj-state wip">rust / .hmod</span>
+          </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">rust</span>
+              <span class="tag">.hmod</span>
+              <span class="tag">Web-mc1/horizon-FryedCheesefork</span>
+              <span class="tag">Plugin-Horizon</span>
+            </div>
+            <a class="proj-ext" href="https://github.com/Plugin-Horizon" target="_blank" rel="noopener">Plugin-Horizon ↗</a>
+          </div>
         </div>
 
-        <div class="ledger" id="ledger">
-          <div class="ledger-row" data-cat="apps">
-            <div class="ledger-main">
-              <span class="ledger-num">01</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">Crispy Launcher</span>
-                <span class="ledger-repo">FryedCheese · SourceForge · Cloudflare Workers</span>
-              </div>
-              <span class="ledger-desc">My cross-platform Electron &amp; Node.js Minecraft launcher with Microsoft authentication and Modrinth browsing.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-live">v0.3.0 RELEASED</span>
-              </div>
-            </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Electron</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">Cloudflare Workers</span>
-              </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View on GitHub ↗</a>
-            </div>
+        <div class="proj-item" data-f="tools">
+          <div class="proj-head">
+            <span class="proj-idx">03</span>
+            <span class="proj-name">S.H.E.R.M.A.N.</span>
+            <span class="proj-summary">satellite tracker for kiwihacks using cesium.js, satellite-js &amp; space-track</span>
+            <span class="proj-state">kiwihacks</span>
           </div>
-
-          <div class="ledger-row" data-cat="minecraft">
-            <div class="ledger-main">
-              <span class="ledger-num">02</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">WaypointsAndMap &amp; Horizon Fork</span>
-                <span class="ledger-repo">Web-mc1/horizon-FryedCheesefork · Plugin-Horizon</span>
-              </div>
-              <span class="ledger-desc">My .hmod mod packages, custom shader setups, and Rust pull requests for the Horizon engine.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-active">RUST / .HMOD</span>
-              </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">cesium.js</span>
+              <span class="tag">satellite-js</span>
+              <span class="tag">space-track.org</span>
             </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Rust</span>
-                <span class="tech-tag">.hmod Plugins</span>
-                <span class="tech-tag">Plugin-Horizon Org</span>
-              </div>
-              <a class="ledger-link" href="https://github.com/Plugin-Horizon" target="_blank" rel="noopener">github.com/Plugin-Horizon ↗</a>
-            </div>
+            <a class="proj-ext" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github repos ↗</a>
           </div>
+        </div>
 
-          <div class="ledger-row" data-cat="apps">
-            <div class="ledger-main">
-              <span class="ledger-num">03</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">S.H.E.R.M.A.N.</span>
-                <span class="ledger-repo">KiwiHacks Project · Orbital Satellite Tracker</span>
-              </div>
-              <span class="ledger-desc">Satellite High Elevation and Radar Monitoring Arrangement Network built with Cesium.js and satellite-js.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-live">WEB APP</span>
-              </div>
-            </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Cesium.js</span>
-                <span class="tech-tag">satellite-js</span>
-                <span class="tech-tag">Space-Track.org</span>
-              </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View Repositories ↗</a>
-            </div>
+        <div class="proj-item" data-f="games">
+          <div class="proj-head">
+            <span class="proj-idx">04</span>
+            <span class="proj-name">Overhook</span>
+            <span class="proj-summary">2d grappling platformer for windows, mac, linux &amp; web on itch.io</span>
+            <span class="proj-state">itch.io</span>
           </div>
-
-          <div class="ledger-row" data-cat="games">
-            <div class="ledger-main">
-              <span class="ledger-num">04</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">Overhook</span>
-                <span class="ledger-repo">fryedcheese.itch.io/overhook</span>
-              </div>
-              <span class="ledger-desc">My 2D physics-based cloud-grappling platformer published for Windows, macOS, Linux, and HTML5 web.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-live">PLAYABLE</span>
-              </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">2d platformer</span>
+              <span class="tag">html5 / desktop</span>
             </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">2D Physics</span>
-                <span class="tech-tag">HTML5 &amp; Desktop</span>
-                <span class="tech-tag">itch.io</span>
-              </div>
-              <a class="ledger-link" href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener">Play on itch.io ↗</a>
-            </div>
+            <a class="proj-ext" href="https://fryedcheese.itch.io/overhook" target="_blank" rel="noopener">fryedcheese.itch.io/overhook ↗</a>
           </div>
+        </div>
 
-          <div class="ledger-row" data-cat="minecraft">
-            <div class="ledger-main">
-              <span class="ledger-num">05</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">MineMath</span>
-                <span class="ledger-repo">GitHub Pages · Survival Calculator</span>
-              </div>
-              <span class="ledger-desc">Multi-tool Minecraft survival calculator web app for Nether portal coordinates, stacks, and XP math.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-live">WEB APP</span>
-              </div>
-            </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">HTML</span>
-                <span class="tech-tag">CSS</span>
-                <span class="tech-tag">JavaScript</span>
-              </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View on GitHub ↗</a>
-            </div>
+        <div class="proj-item" data-f="mc tools">
+          <div class="proj-head">
+            <span class="proj-idx">05</span>
+            <span class="proj-name">MineMath</span>
+            <span class="proj-summary">minecraft survival calculator for portals, stacks, and xp</span>
+            <span class="proj-state">web</span>
           </div>
-
-          <div class="ledger-row" data-cat="apps">
-            <div class="ledger-main">
-              <span class="ledger-num">06</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">J.A.R.V.I.S. Linux Assistant</span>
-                <span class="ledger-repo">Local AI Voice Daemon · Bazzite Linux</span>
-              </div>
-              <span class="ledger-desc">My local voice-activated assistant daemon powered by faster-whisper and Ollama to launch apps and run searches.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-active">IN DEVELOPMENT</span>
-              </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">html</span>
+              <span class="tag">css</span>
+              <span class="tag">javascript</span>
+              <span class="tag">github pages</span>
             </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">faster-whisper</span>
-                <span class="tech-tag">Ollama</span>
-                <span class="tech-tag">KDE Plasma</span>
-              </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">GitHub Profile ↗</a>
-            </div>
+            <a class="proj-ext" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github repos ↗</a>
           </div>
+        </div>
 
-          <div class="ledger-row" data-cat="minecraft">
-            <div class="ledger-main">
-              <span class="ledger-num">07</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">CrispySprings SMP &amp; CheeseWhiz SMP</span>
-                <span class="ledger-repo">Paper / Folia · Discord Bridge Plugins</span>
-              </div>
-              <span class="ledger-desc">My Minecraft multiplayer servers and custom Discord-to-Minecraft bridge plugins for tickets and moderation.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-live">SERVER INFRA</span>
-              </div>
-            </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Paper / Folia</span>
-                <span class="tech-tag">LuckPerms</span>
-                <span class="tech-tag">AMP / Pterodactyl</span>
-                <span class="tech-tag">Tailscale</span>
-              </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">View Repos ↗</a>
-            </div>
+        <div class="proj-item" data-f="tools">
+          <div class="proj-head">
+            <span class="proj-idx">06</span>
+            <span class="proj-name">J.A.R.V.I.S.</span>
+            <span class="proj-summary">local voice assistant on linux using faster-whisper and ollama</span>
+            <span class="proj-state wip">in progress</span>
           </div>
-
-          <div class="ledger-row" data-cat="minecraft">
-            <div class="ledger-main">
-              <span class="ledger-num">08</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">fryedCheese_red &amp; Grate Minds Packs</span>
-                <span class="ledger-repo">Modrinth · Resource &amp; Data Packs</span>
-              </div>
-              <span class="ledger-desc">My fryedCheese_red resource pack, Lifehood pack, and Cobblestone-to-Sand data pack published under Grate Minds.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-live">MODRINTH</span>
-              </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">python</span>
+              <span class="tag">faster-whisper</span>
+              <span class="tag">ollama</span>
+              <span class="tag">bazzite linux</span>
             </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Resource Packs</span>
-                <span class="tech-tag">Data Packs</span>
-                <span class="tech-tag">Grate Minds</span>
-              </div>
-              <a class="ledger-link" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">Explore Projects ↗</a>
-            </div>
+            <a class="proj-ext" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github repos ↗</a>
           </div>
+        </div>
 
-          <div class="ledger-row" data-cat="apps">
-            <div class="ledger-main">
-              <span class="ledger-num">09</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">Discord Command &amp; Control Hub</span>
-                <span class="ledger-repo">Centralized Bot Telemetry &amp; Webhooks</span>
-              </div>
-              <span class="ledger-desc">Centralized Discord operations server aggregating webhook logs, bot statuses, and formatted announcements.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-active">BOT OPS</span>
-              </div>
-            </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">Discord Webhooks</span>
-                <span class="tech-tag">Automation</span>
-              </div>
-              <a class="ledger-link" href="#contact">Connect on Discord ↗</a>
-            </div>
+        <div class="proj-item" data-f="mc">
+          <div class="proj-head">
+            <span class="proj-idx">07</span>
+            <span class="proj-name">CrispySprings SMP &amp; CheeseWhiz</span>
+            <span class="proj-summary">smp servers, discord-to-minecraft ticket/sync bridges, paper/folia/amp</span>
+            <span class="proj-state">smp</span>
           </div>
-
-          <div class="ledger-row" data-cat="games">
-            <div class="ledger-main">
-              <span class="ledger-num">10</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">Alloy Gaming Platform Concept</span>
-                <span class="ledger-repo">UGC Platform · Alloy Currency &amp; Wardrobe</span>
-              </div>
-              <span class="ledger-desc">My multiplayer gaming platform design featuring the Alloy currency, marketplace trading, and avatar wardrobe.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-active">DESIGN / R&amp;D</span>
-              </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">paper / folia</span>
+              <span class="tag">luckperms</span>
+              <span class="tag">amp / pterodactyl</span>
+              <span class="tag">tailscale</span>
             </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Lua</span>
-                <span class="tech-tag">C++</span>
-                <span class="tech-tag">Game Systems</span>
-              </div>
-              <a class="ledger-link" href="#contact">Get in Touch ↗</a>
-            </div>
+            <a class="proj-ext" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github repos ↗</a>
           </div>
+        </div>
 
-          <div class="ledger-row" data-cat="games">
-            <div class="ledger-main">
-              <span class="ledger-num">11</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">Visual Novel Soundtrack Composition</span>
-                <span class="ledger-repo">Spooktober 8th Annual Visual Novel Jam</span>
-              </div>
-              <span class="ledger-desc">Original music composition created for collaborative visual novel game jam releases on itch.io.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-live">RELEASED</span>
-              </div>
-            </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">Music Composition</span>
-                <span class="tech-tag">Game Jam</span>
-                <span class="tech-tag">itch.io</span>
-              </div>
-              <a class="ledger-link" href="https://fryedcheese.itch.io" target="_blank" rel="noopener">itch.io Page ↗</a>
-            </div>
+        <div class="proj-item" data-f="mc">
+          <div class="proj-head">
+            <span class="proj-idx">08</span>
+            <span class="proj-name">fryedCheese_red &amp; Grate Minds</span>
+            <span class="proj-summary">fryedCheese_red resource pack, lifehood pack &amp; cobblestone-to-sand datapack</span>
+            <span class="proj-state">modrinth</span>
           </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">resource pack</span>
+              <span class="tag">data pack</span>
+              <span class="tag">grate minds</span>
+            </div>
+            <a class="proj-ext" href="https://github.com/FryedCheese?tab=repositories" target="_blank" rel="noopener">github repos ↗</a>
+          </div>
+        </div>
 
-          <div class="ledger-row" data-cat="apps">
-            <div class="ledger-main">
-              <span class="ledger-num">12</span>
-              <div class="ledger-title-wrap">
-                <span class="ledger-title">@fryed_cheese YouTube Channel</span>
-                <span class="ledger-repo">youtube.com/@fryed_cheese</span>
-              </div>
-              <span class="ledger-desc">My gaming commentary, Crispy Launcher showcases, and software devlog videos &amp; Shorts.</span>
-              <div class="ledger-right">
-                <span class="pill-status status-live">CREATOR</span>
-              </div>
+        <div class="proj-item" data-f="tools">
+          <div class="proj-head">
+            <span class="proj-idx">09</span>
+            <span class="proj-name">Discord C&amp;C Hub</span>
+            <span class="proj-summary">central discord hub for webhook logs, bot status checks, and announcements</span>
+            <span class="proj-state wip">building</span>
+          </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">discord</span>
+              <span class="tag">webhooks</span>
+              <span class="tag">node.js</span>
             </div>
-            <div class="ledger-details">
-              <div class="tech-tags">
-                <span class="tech-tag">OBS Studio</span>
-                <span class="tech-tag">Software Showcases</span>
-                <span class="tech-tag">Gaming</span>
-              </div>
-              <a class="ledger-link" href="https://www.youtube.com/@fryed_cheese" target="_blank" rel="noopener">youtube.com/@fryed_cheese ↗</a>
+            <a class="proj-ext" href="#contact">ask on discord ↗</a>
+          </div>
+        </div>
+
+        <div class="proj-item" data-f="games">
+          <div class="proj-head">
+            <span class="proj-idx">10</span>
+            <span class="proj-name">Alloy Platform</span>
+            <span class="proj-summary">multiplayer game platform idea with alloy currency, trading &amp; avatar wardrobe</span>
+            <span class="proj-state wip">concept</span>
+          </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">lua</span>
+              <span class="tag">c++</span>
+              <span class="tag">alloy currency</span>
             </div>
+            <a class="proj-ext" href="#contact">contact ↗</a>
+          </div>
+        </div>
+
+        <div class="proj-item" data-f="games">
+          <div class="proj-head">
+            <span class="proj-idx">11</span>
+            <span class="proj-name">Visual Novel Music</span>
+            <span class="proj-summary">music for a spooktober visual novel jam project on itch.io</span>
+            <span class="proj-state">released</span>
+          </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">music</span>
+              <span class="tag">visual novel jam</span>
+              <span class="tag">itch.io</span>
+            </div>
+            <a class="proj-ext" href="https://fryedcheese.itch.io" target="_blank" rel="noopener">itch.io ↗</a>
+          </div>
+        </div>
+
+        <div class="proj-item" data-f="tools games">
+          <div class="proj-head">
+            <span class="proj-idx">12</span>
+            <span class="proj-name">@fryed_cheese</span>
+            <span class="proj-summary">youtube videos &amp; shorts covering crispy launcher, mods, and games</span>
+            <span class="proj-state">youtube</span>
+          </div>
+          <div class="proj-body">
+            <div class="tags">
+              <span class="tag">youtube</span>
+              <span class="tag">obs</span>
+              <span class="tag">showcases</span>
+            </div>
+            <a class="proj-ext" href="https://www.youtube.com/@fryed_cheese" target="_blank" rel="noopener">youtube.com/@fryed_cheese ↗</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Stack & Workstation -->
-    <section id="stack">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <div class="section-eyebrow">My Setup &amp; Skills</div>
-            <h2>Languages, GitHub &amp; Workstation</h2>
-          </div>
-          <p>The languages I write, my GitHub accounts, and the Linux laptop I build everything on.</p>
+    <section id="setup" class="sec">
+      <div class="sec-top">
+        <h2>languages, github &amp; laptop</h2>
+        <span>daily setup</span>
+      </div>
+
+      <div class="cols">
+        <div class="box">
+          <h3>code &amp; github</h3>
+          <ul class="kv">
+            <li><span class="k">languages</span><span class="v">rust, c++, lua, python, js/html/css</span></li>
+            <li><span class="k">github</span><span class="v">12 repos · pull shark x2 · pair</span></li>
+            <li><span class="k">orgs &amp; alt</span><span class="v">Plugin-Horizon · Web-mc1</span></li>
+            <li><span class="k">hosting</span><span class="v">github pages · workers · tailscale</span></li>
+          </ul>
         </div>
 
-        <div class="open-grid">
-          <div class="open-card">
-            <div>
-              <h3>Languages I Code In</h3>
-              <p>From low-level engine mods and game scripting to desktop launchers and web tools.</p>
-            </div>
-            <ul class="stat-list">
-              <li><span>Systems &amp; Mods</span><span class="stat-val">Rust · C++</span></li>
-              <li><span>Games &amp; AI</span><span class="stat-val">Lua · Python</span></li>
-              <li><span>Apps &amp; Web</span><span class="stat-val">Node.js · JS · HTML/CSS</span></li>
-              <li><span>Achievement</span><span class="stat-val">MIT Hackathon Winner</span></li>
-            </ul>
-          </div>
-
-          <div class="open-card">
-            <div>
-              <h3>GitHub &amp; Hosting</h3>
-              <p>Active across FryedCheese, Web-mc1, and the Plugin-Horizon organization.</p>
-            </div>
-            <ul class="stat-list">
-              <li><span>Public Repos</span><span class="stat-val">12 Repositories</span></li>
-              <li><span>Achievements</span><span class="stat-val">Pull Shark x2 · Pair</span></li>
-              <li><span>Deployments</span><span class="stat-val">GitHub Pages · Workers</span></li>
-              <li><span>Server Network</span><span class="stat-val">Tailscale · Playit.gg</span></li>
-            </ul>
-          </div>
-
-          <div class="open-card">
-            <div>
-              <h3>My Linux Rig</h3>
-              <p>Lenovo LOQ 15ARP10E running immutable Bazzite Linux with KDE Plasma 6.</p>
-            </div>
-            <ul class="stat-list">
-              <li><span>OS &amp; DE</span><span class="stat-val">Bazzite · KDE Plasma</span></li>
-              <li><span>Processor</span><span class="stat-val">Ryzen 7 7735HS</span></li>
-              <li><span>Graphics</span><span class="stat-val">RTX 4050 + Radeon 680M</span></li>
-              <li><span>Memory</span><span class="stat-val">16 GiB RAM</span></li>
-            </ul>
-          </div>
+        <div class="box">
+          <h3>machine &amp; os</h3>
+          <ul class="kv">
+            <li><span class="k">laptop</span><span class="v">lenovo loq 15arp10e</span></li>
+            <li><span class="k">os</span><span class="v">bazzite linux · kde plasma 6</span></li>
+            <li><span class="k">cpu / gpu</span><span class="v">ryzen 7 7735hs · rtx 4050 + 680m</span></li>
+            <li><span class="k">ram</span><span class="v">16 gib</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" style="border-bottom: none; padding-bottom: 32px;">
-      <div class="container">
-        <div class="contact-strip">
-          <div>
-            <div class="section-eyebrow">Reach Out</div>
-            <h2 style="font-size: 1.45rem; font-weight: 800;">Questions, Feedback &amp; Business Inquiries</h2>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">Click either button to copy my Discord handle or email address.</p>
-          </div>
-          <div class="copy-group">
-            <button class="copy-btn" data-copy="fryedcheese">
-              <span>Discord:</span>
-              <strong style="color: var(--accent-bright);">fryedcheese</strong>
-              <span>⧉</span>
-            </button>
-            <button class="copy-btn" data-copy="etienne.gauchet.yt@gmail.com">
-              <span>Email:</span>
-              <strong style="color: var(--accent-bright);">etienne.gauchet.yt@gmail.com</strong>
-              <span>⧉</span>
-            </button>
-          </div>
+    <section id="contact" class="sec" style="margin-bottom: 0;">
+      <div class="contact-box">
+        <div>
+          <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 2px;">contact</h2>
+          <p>questions, launcher stuff, or business inquiries.</p>
+        </div>
+        <div class="copy-btns">
+          <button class="copy-btn" data-copy="fryedcheese">discord: fryedcheese</button>
+          <button class="copy-btn" data-copy="etienne.gauchet.yt@gmail.com">email: etienne.gauchet.yt@gmail.com</button>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="container">
-    <span>© 2026 Étienne Gauchet (FryedCheese) · fryedcheese.dpdns.org</span>
-    <span>Hosted on GitHub Pages · Domain via DigitalPlat</span>
+  <footer class="wrap">
+    <span>fryedcheese · fryedcheese.dpdns.org</span>
+    <span>github pages + digitalplat</span>
   </footer>
 
-  <div class="toast" id="toast">Copied to clipboard</div>
+  <div class="copied-msg" id="copied">copied</div>
 
   <script>
-    // OS Release Switcher for Crispy Launcher
-    const osTargets = {
-      win: {
-        text: "Crispy-Launcher-Setup-0.3.0.exe",
-        href: "https://github.com/FryedCheese?tab=repositories"
-      },
-      linux: {
-        text: "Crispy-Launcher-0.3.0 (Linux Build)",
-        href: "https://github.com/FryedCheese?tab=repositories"
-      },
-      web: {
-        text: "SourceForge & Cloudflare Workers",
-        href: "https://github.com/FryedCheese?tab=repositories"
-      }
+    const builds = {
+      win: { name: "Crispy-Launcher-Setup-0.3.0.exe", href: "https://github.com/FryedCheese?tab=repositories", label: "repo ↗" },
+      linux: { name: "Crispy Launcher (Linux build)", href: "https://github.com/FryedCheese?tab=repositories", label: "repo ↗" },
+      sf: { name: "SourceForge & Cloudflare Workers", href: "https://github.com/FryedCheese?tab=repositories", label: "repo ↗" }
     };
 
-    document.querySelectorAll(".os-tab").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".os-tab").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const cfg = osTargets[btn.dataset.os];
-        document.getElementById("os-target").textContent = cfg.text;
-        document.getElementById("os-link").href = cfg.href;
+    document.querySelectorAll(".dl-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".dl-tab").forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+        const b = builds[tab.dataset.build];
+        document.getElementById("build-file").textContent = b.name;
+        const link = document.getElementById("build-url");
+        link.href = b.href;
+        link.textContent = b.label;
       });
     });
 
-    // Interactive Project Spotlight Slider
-    const range = document.getElementById("comp-range");
-    const leftPane = document.getElementById("comp-left");
-    const divider = document.getElementById("comp-divider");
-
-    function updateSlider(val) {
-      leftPane.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-      divider.style.left = `${val}%`;
-    }
-
-    range.addEventListener("input", (e) => updateSlider(e.target.value));
-
-    const spotlightModes = {
-      desktop: {
-        leftLabel: "MY LAUNCHER · v0.3.0",
-        leftMetric: "Crispy Launcher",
-        leftDesc: "Cross-platform Electron & Node.js launcher with Microsoft auth, Modrinth modpack installs, and Cloudflare Workers landing page.",
-        rightLabel: "MY HORIZON MOD · PLUGIN-HORIZON",
-        rightMetric: "WaypointsAndMap",
-        rightDesc: "Custom .hmod package and Rust fork patches (horizon-FryedCheesefork) built for the Horizon client engine."
-      },
-      webgame: {
-        leftLabel: "ORBITAL TRACKER · KIWIHACKS",
-        leftMetric: "S.H.E.R.M.A.N.",
-        leftDesc: "3D satellite tracking and radar monitoring network built with Cesium.js, satellite-js, and Space-Track orbital data.",
-        rightLabel: "INDIE 2D PLATFORMER · ITCH.IO",
-        rightMetric: "Overhook",
-        rightDesc: "Physics-based cloud-grappling platformer built and published for Windows, macOS, Linux, and HTML5 web."
-      }
-    };
-
-    document.querySelectorAll(".bench-mode-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".bench-mode-btn").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const m = spotlightModes[btn.dataset.mode];
-        document.getElementById("left-label").textContent = m.leftLabel;
-        document.getElementById("left-metric").textContent = m.leftMetric;
-        document.getElementById("left-desc").textContent = m.leftDesc;
-        document.getElementById("right-label").textContent = m.rightLabel;
-        document.getElementById("right-metric").textContent = m.rightMetric;
-        document.getElementById("right-desc").textContent = m.rightDesc;
-      });
+    document.querySelectorAll(".proj-head").forEach((h) => {
+      h.addEventListener("click", () => h.parentElement.classList.toggle("open"));
     });
 
-    // Ledger Expand/Collapse & Category Filters
-    document.querySelectorAll(".ledger-main").forEach((rowMain) => {
-      rowMain.addEventListener("click", () => {
-        rowMain.parentElement.classList.toggle("open");
-      });
-    });
-
-    document.querySelectorAll(".filter-btn").forEach((btn) => {
+    document.querySelectorAll(".fbtn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+        document.querySelectorAll(".fbtn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
-        const filter = btn.dataset.filter;
-        document.querySelectorAll(".ledger-row").forEach((row) => {
-          row.style.display = filter === "all" || row.dataset.cat === filter ? "block" : "none";
+        const f = btn.dataset.f;
+        document.querySelectorAll(".proj-item").forEach((item) => {
+          const cats = item.dataset.f.split(" ");
+          item.style.display = f === "all" || cats.includes(f) ? "block" : "none";
         });
       });
     });
 
-    // Clipboard Copy Toast
-    const toast = document.getElementById("toast");
-    let toastTimer;
-
+    const copied = document.getElementById("copied");
+    let timer;
     document.querySelectorAll(".copy-btn").forEach((btn) => {
       btn.addEventListener("click", async () => {
-        const value = btn.dataset.copy;
-        try {
-          await navigator.clipboard.writeText(value);
-          toast.textContent = `Copied: ${value}`;
-        } catch {
-          toast.textContent = value;
-        }
-        toast.classList.add("show");
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+        const val = btn.dataset.copy;
+        try { await navigator.clipboard.writeText(val); } catch {}
+        copied.textContent = "copied: " + val;
+        copied.classList.add("show");
+        clearTimeout(timer);
+        timer = setTimeout(() => copied.classList.remove("show"), 2000);
       });
     });
   </script>
