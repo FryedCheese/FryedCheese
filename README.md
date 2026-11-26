@@ -1,6 +1,6 @@
 <div align="center">
 
-# Hey, I'm FryedCheese 👋
+# Hey, I'm FryedCheese 
 
 **Developer • Game Creator • Modder • Linux Tinkerer**
 
@@ -12,7 +12,7 @@
 
 ---
 
-### 🔭 Currently Working On
+###  Currently Working On
 - **Crispy Launcher** — A cross-platform Minecraft launcher built with Electron & Node.js featuring Microsoft auth, multi-loader support, and built-in Modrinth browsing.
 - **Horizon** — Rebuilding Minecraft from the ground up in Rust, including custom `.hmod` packages (like *WaypointsAndMap*) and engine patches.
 - **J.A.R.V.I.S.** — A local, voice-activated Linux assistant daemon powered by `faster-whisper` and `Ollama`.
@@ -20,7 +20,7 @@
 
 ---
 
-### 🛠️ Tech Stack & Tools
+###  Tech Stack & Tools
 
 **Languages**  
 ![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white)
@@ -40,7 +40,7 @@
 
 ---
 
-### 🎮 Featured Projects
+###  Featured Projects
 - **[Overhook](https://fryedcheese.itch.io/overhook)** — A 2D physics-based cloud-grappling platformer published on itch.io.
 - **S.H.E.R.M.A.N.** — Real-time orbital satellite tracking web app built with Cesium.js and `satellite-js`.
 - **MineMath** — Multi-tool Minecraft survival calculator web utility.
@@ -48,6 +48,6 @@
 
 ---
 
-### 📫 Get in Touch
+###  Get in Touch
 - **Discord:** `fryedcheese`
 - **Business & Inquiries:** `etienne.gauchet.yt@gmail.com`
